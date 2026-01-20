@@ -444,37 +444,42 @@ def evaluate_qa_with_captions(args):
 
     # Process in batches and save incrementally
     batch_size = max(1, int(args.save_every))
-    for start in range(0, total_remaining, batch_size):
-        idxs = indices_to_process[start:start + batch_size]
-        batch_prompts = [prompts[i] for i in idxs]
+    progress = tqdm(total=total_remaining, desc="Evaluating", unit="q")
+    try:
+        for start in range(0, total_remaining, batch_size):
+            idxs = indices_to_process[start:start + batch_size]
+            batch_prompts = [prompts[i] for i in idxs]
 
-        if backend == "vllm":
-            # Collect responses using vLLM
-            outs = AMD_vllm_text_chat_call(
-                client,
-                batch_prompts,
-                temperature=0.0,
-                max_tokens=args.max_tokens,
-                n=1,
-                return_all=False,
-                use_tqdm=False,
-                system=system_prompt,
-            )
-            if outs and isinstance(outs, list) and len(outs) > 0 and isinstance(outs[0], list):
-                batch_responses = [lst[0] if lst else "" for lst in outs]
-            else:
-                batch_responses = [o if isinstance(o, str) else "" for o in (outs or [])]
-        else:
-            batch_responses = [
-                transformers_generate_text(
-                    hf_model,
-                    hf_tokenizer,
-                    prompt,
-                    system_prompt,
-                    args.max_tokens,
+            if backend == "vllm":
+                # Collect responses using vLLM
+                outs = AMD_vllm_text_chat_call(
+                    client,
+                    batch_prompts,
+                    temperature=0.0,
+                    max_tokens=args.max_tokens,
+                    n=1,
+                    return_all=False,
+                    use_tqdm=False,
+                    system=system_prompt,
                 )
-                for prompt in batch_prompts
-            ]
+                if outs and isinstance(outs, list) and len(outs) > 0 and isinstance(outs[0], list):
+                    batch_responses = [lst[0] if lst else "" for lst in outs]
+                else:
+                    batch_responses = [o if isinstance(o, str) else "" for o in (outs or [])]
+                progress.update(len(idxs))
+            else:
+                batch_responses = []
+                for prompt in batch_prompts:
+                    batch_responses.append(
+                        transformers_generate_text(
+                            hf_model,
+                            hf_tokenizer,
+                            prompt,
+                            system_prompt,
+                            args.max_tokens,
+                        )
+                    )
+                    progress.update(1)
 
         # Score and append results for this batch
         for resp, i in zip(batch_responses, idxs):
@@ -523,26 +528,28 @@ def evaluate_qa_with_captions(args):
             }
             results[image_key].append(result_entry)
 
-        # Save after each batch
-        with open(args.output_path, "w", encoding="utf-8") as f:
-            json.dump(results, f, indent=2, ensure_ascii=False)
-        print(f"Saved {sum(len(v) for v in results.values())} results -> {args.output_path}")
-        
-        # Print running totals
-        running_total = sum(len(v) for v in results.values())
-        running_total_score = sum(sum(item.get("score", 0.0) for item in v) for v in results.values())
-        running_correct = sum(
-            sum(1 for item in v if item.get("is_correct")) for v in results.values()
-        )
-        running_cannot = sum(
-            sum(1 for item in v if item.get("is_cannot_answer")) for v in results.values()
-        )
-        running_avg = (running_total_score / running_total) if running_total else 0.0
-        running_acc = (running_correct / running_total) if running_total else 0.0
-        print(
-            f"[progress] processed={running_total} | total_score={running_total_score:.2f} "
-            f"| avg_score={running_avg:.4f} | accuracy={running_acc:.2%} | cannot_answer={running_cannot}"
-        )
+            # Save after each batch
+            with open(args.output_path, "w", encoding="utf-8") as f:
+                json.dump(results, f, indent=2, ensure_ascii=False)
+            print(f"Saved {sum(len(v) for v in results.values())} results -> {args.output_path}")
+            
+            # Print running totals
+            running_total = sum(len(v) for v in results.values())
+            running_total_score = sum(sum(item.get("score", 0.0) for item in v) for v in results.values())
+            running_correct = sum(
+                sum(1 for item in v if item.get("is_correct")) for v in results.values()
+            )
+            running_cannot = sum(
+                sum(1 for item in v if item.get("is_cannot_answer")) for v in results.values()
+            )
+            running_avg = (running_total_score / running_total) if running_total else 0.0
+            running_acc = (running_correct / running_total) if running_total else 0.0
+            print(
+                f"[progress] processed={running_total} | total_score={running_total_score:.2f} "
+                f"| avg_score={running_avg:.4f} | accuracy={running_acc:.2%} | cannot_answer={running_cannot}"
+            )
+    finally:
+        progress.close()
 
     # Final summary
     print_final_summary(results, model_id)
