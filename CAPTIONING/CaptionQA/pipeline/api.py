@@ -392,7 +392,7 @@ class AMDvLLMClient:
 
 
 def AMD_vllm_chat_client(
-    model: str = "Qwen/Qwen2.5-7B-Instruct",
+    model: str = "/mnt/data-alpha-sg-02/team-agent/ai_glasses/models/Qwen2.5-72B",
     *,
     tp_size: int = 1,
     gpu_memory_utilization: float = 0.8,

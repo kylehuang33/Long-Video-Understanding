@@ -5,7 +5,7 @@ import mimetypes
 from tqdm import tqdm
 import time
 import random
-# import openai
+import openai
 import tempfile
 from typing import Tuple, Optional, Any, List, Dict
 from PIL import Image
@@ -48,6 +48,49 @@ def detect_model_backend(model: str) -> str:
         return 'llama'
     else:
         return 'openai'
+
+
+def _looks_like_path(value: str) -> bool:
+    if not value:
+        return False
+    if value.startswith(("/", "./", "../", "~", "\\\\")):
+        return True
+    if len(value) >= 3 and value[1] == ":" and value[2] in ("/", "\\"):
+        return True
+    expanded = os.path.expandvars(os.path.expanduser(value))
+    if os.path.exists(expanded):
+        return True
+    sep_count = value.count("/") + value.count("\\")
+    return sep_count > 1
+
+
+def _sanitize_name(value: str) -> str:
+    safe_chars = []
+    last_was_sep = False
+    for ch in value:
+        if ch.isascii() and (ch.isalnum() or ch in "._-"):
+            safe_chars.append(ch)
+            last_was_sep = False
+        else:
+            if not last_was_sep:
+                safe_chars.append("_")
+                last_was_sep = True
+    cleaned = "".join(safe_chars).strip("._-")
+    return cleaned or "model"
+
+
+def make_model_safe(model: Optional[str]) -> str:
+    raw = (model or "").strip()
+    if not raw:
+        return "model"
+    if _looks_like_path(raw):
+        expanded = os.path.expandvars(os.path.expanduser(raw))
+        normalized = os.path.normpath(expanded)
+        normalized = normalized.replace("\\", "/")
+        base = os.path.basename(normalized)
+        if base:
+            raw = base
+    return _sanitize_name(raw)
 
 
 def load_captionqa_dataset(dataset_name: str, split: str):
@@ -425,7 +468,7 @@ def main():
         return
     
     # Derive output path from --output-dir
-    model_safe = "_".join((args.model or "").split("/"))
+    model_safe = make_model_safe(args.model)
     out_dir = os.path.join(args.output_dir, (args.prompt or "").lower())
     os.makedirs(out_dir, exist_ok=True)
     args.output_path = os.path.join(out_dir, f"{model_safe}.json")

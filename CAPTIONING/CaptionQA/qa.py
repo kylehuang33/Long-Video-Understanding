@@ -7,7 +7,7 @@ Each question is answered once by an LLM using only the caption as context.
 Features:
 - Loads questions from Hugging Face dataset (Borise/CaptionQA)
 - Requires custom captions (from caption.py)
-- Uses Qwen2.5-72B-Instruct for evaluation
+- Uses Qwen2.5-72B-Instruct for evaluation by default
 - Adds "Cannot answer from the caption" option to non-yes/no questions
 - Automatic shuffling of answer choices (with order tracking)
 
@@ -38,8 +38,8 @@ from pipeline.api import AMD_vllm_chat_client, AMD_vllm_text_chat_call
 LETTER_ALPH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 CANNOT_ANSWER_TEXT = "Cannot answer from the caption"
 
-# Fixed model for evaluation
-EVAL_MODEL = "Qwen/Qwen2.5-72B-Instruct"
+# Default model for evaluation
+DEFAULT_EVAL_MODEL = "Qwen/Qwen2.5-72B-Instruct"
 
 # Available domain splits in the dataset
 DOMAIN_SPLITS = ["natural", "document", "ecommerce", "embodiedai"]
@@ -162,6 +162,90 @@ Answer:"""
     return prompt
 
 
+def model_base_name(model: str) -> str:
+    if not model:
+        return ""
+    trimmed = model.strip().rstrip("/\\")
+    return os.path.basename(trimmed)
+
+
+def derive_caption_tag(caption_path: str) -> str:
+    caption_base = os.path.splitext(os.path.basename(caption_path))[0]
+    prompt_name = os.path.basename(os.path.dirname(caption_path))
+    if prompt_name:
+        return f"cap_{prompt_name}-{caption_base}"
+    return f"cap_{caption_base}"
+
+
+def derive_output_path(caption_path: str, model: str) -> str:
+    caption_tag = derive_caption_tag(caption_path)
+    model_base = model_base_name(model)
+    qa_tag = f"qa_{model_base}" if model_base else "qa"
+    filename = f"{caption_tag}__{qa_tag}.json"
+    return os.path.join(os.path.dirname(caption_path), filename)
+
+
+def build_transformers_input_ids(tokenizer, system_prompt: str, user_prompt: str):
+    if hasattr(tokenizer, "apply_chat_template"):
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ]
+        try:
+            input_ids = tokenizer.apply_chat_template(
+                messages, tokenize=True, add_generation_prompt=True, return_tensors="pt"
+            )
+        except TypeError:
+            messages = [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": [{"type": "text", "text": user_prompt}]},
+            ]
+            input_ids = tokenizer.apply_chat_template(
+                messages, tokenize=True, add_generation_prompt=True, return_tensors="pt"
+            )
+    else:
+        input_ids = tokenizer(f"{system_prompt}\n\n{user_prompt}", return_tensors="pt").input_ids
+
+    if isinstance(input_ids, dict):
+        return input_ids["input_ids"]
+    return input_ids
+
+
+def load_transformers_text_model(model_path: str):
+    try:
+        import torch  # type: ignore
+        from transformers import AutoModelForCausalLM, AutoTokenizer  # type: ignore
+    except Exception as e:
+        raise RuntimeError(
+            "transformers/torch are not installed. pip install 'transformers torch'"
+        ) from e
+
+    tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
+    model = AutoModelForCausalLM.from_pretrained(
+        model_path,
+        torch_dtype="auto",
+        device_map="auto",
+        trust_remote_code=True,
+    )
+    model.eval()
+    return model, tokenizer
+
+
+def transformers_generate_text(model, tokenizer, prompt: str, system_prompt: str, max_new_tokens: int) -> str:
+    import torch  # type: ignore
+
+    input_ids = build_transformers_input_ids(tokenizer, system_prompt, prompt)
+    input_ids = input_ids.to(next(model.parameters()).device)
+    with torch.no_grad():
+        generated_ids = model.generate(
+            input_ids=input_ids,
+            max_new_tokens=int(max_new_tokens),
+            do_sample=False,
+        )
+    output_ids = generated_ids[0][input_ids.shape[-1]:]
+    return tokenizer.decode(output_ids, skip_special_tokens=True).strip()
+
+
 def load_captionqa_dataset(dataset_name: str, split: str):
     """
     Load CaptionQA dataset from HuggingFace.
@@ -199,9 +283,21 @@ def evaluate_qa_with_captions(args):
         captions = json.load(f)
     print(f"Loaded {len(captions)} captions")
     
-    # Initialize vLLM client for Qwen2.5-72B-Instruct
-    print(f"Using model: {EVAL_MODEL}")
-    client = AMD_vllm_chat_client(model=EVAL_MODEL)
+    model_id = args.model
+    backend = args.backend
+
+    print(f"Using backend: {backend}")
+    print(f"Using model: {model_id}")
+
+    client = None
+    hf_model = None
+    hf_tokenizer = None
+    if backend == "vllm":
+        client = AMD_vllm_chat_client(model=model_id, tp_size=args.tp_size)
+    elif backend == "transformers":
+        hf_model, hf_tokenizer = load_transformers_text_model(model_id)
+    else:
+        raise ValueError(f"Unsupported backend: {backend}")
     
     # Setup RNG for shuffling
     rng = random.Random(args.seed)
@@ -299,13 +395,14 @@ def evaluate_qa_with_captions(args):
     # Load existing results if present (auto-resume)
     results = {}
     os.makedirs(os.path.dirname(args.output_path) or ".", exist_ok=True)
-    try:
-        with open(args.output_path, "r", encoding="utf-8") as f:
-            results = json.load(f) or {}
-        print(f"Loaded existing results from {args.output_path} (resume mode)")
-    except Exception as e:
-        print(f"Warning: could not load existing results ({e}); starting fresh")
-        results = {}
+    if os.path.exists(args.output_path):
+        try:
+            with open(args.output_path, "r", encoding="utf-8") as f:
+                results = json.load(f) or {}
+            print(f"Loaded existing results from {args.output_path} (resume mode)")
+        except Exception as e:
+            print(f"Warning: could not load existing results ({e}); starting fresh")
+            results = {}
 
     # Map image -> already processed count
     processed_count = {k: len(v) for k, v in results.items() if isinstance(v, list)}
@@ -339,7 +436,7 @@ def evaluate_qa_with_captions(args):
 
     if total_remaining == 0:
         # Print summary from existing results and exit
-        print_final_summary(results)
+        print_final_summary(results, model_id)
         return
 
     # Ensure output directory exists
@@ -351,21 +448,33 @@ def evaluate_qa_with_captions(args):
         idxs = indices_to_process[start:start + batch_size]
         batch_prompts = [prompts[i] for i in idxs]
 
-        # Collect responses using vLLM
-        outs = AMD_vllm_text_chat_call(
-            client,
-            batch_prompts,
-            temperature=0.0,
-            max_tokens=args.max_tokens,
-            n=1,
-            return_all=False,
-            use_tqdm=False,
-            system=system_prompt,
-        )
-        if outs and isinstance(outs, list) and len(outs) > 0 and isinstance(outs[0], list):
-            batch_responses = [lst[0] if lst else "" for lst in outs]
+        if backend == "vllm":
+            # Collect responses using vLLM
+            outs = AMD_vllm_text_chat_call(
+                client,
+                batch_prompts,
+                temperature=0.0,
+                max_tokens=args.max_tokens,
+                n=1,
+                return_all=False,
+                use_tqdm=False,
+                system=system_prompt,
+            )
+            if outs and isinstance(outs, list) and len(outs) > 0 and isinstance(outs[0], list):
+                batch_responses = [lst[0] if lst else "" for lst in outs]
+            else:
+                batch_responses = [o if isinstance(o, str) else "" for o in (outs or [])]
         else:
-            batch_responses = [o if isinstance(o, str) else "" for o in (outs or [])]
+            batch_responses = [
+                transformers_generate_text(
+                    hf_model,
+                    hf_tokenizer,
+                    prompt,
+                    system_prompt,
+                    args.max_tokens,
+                )
+                for prompt in batch_prompts
+            ]
 
         # Score and append results for this batch
         for resp, i in zip(batch_responses, idxs):
@@ -436,10 +545,10 @@ def evaluate_qa_with_captions(args):
         )
 
     # Final summary
-    print_final_summary(results)
+    print_final_summary(results, model_id)
 
 
-def print_final_summary(results: Dict[str, List]):
+def print_final_summary(results: Dict[str, List], model_name: str):
     """Print final evaluation summary."""
     total_questions = sum(len(v) for v in results.values())
     total_score = sum(sum(item.get("score", 0.0) for item in v) for v in results.values())
@@ -455,7 +564,7 @@ def print_final_summary(results: Dict[str, List]):
     print(f"\n{'='*60}")
     print(f"Evaluation Results:")
     print(f"{'='*60}")
-    print(f"Model: {EVAL_MODEL}")
+    print(f"Model: {model_name}")
     print(f"Total questions: {total_questions}")
     print(f"Correct answers: {correct_answers} ({overall_accuracy:.2%})")
     print(f"'Cannot answer' selections: {cannot_answer_count}")
@@ -471,11 +580,11 @@ def print_final_summary(results: Dict[str, List]):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Evaluate questions using captions with Borise/CaptionQA dataset (using Qwen2.5-72B-Instruct)"
+        description="Evaluate questions using captions with Borise/CaptionQA dataset"
     )
     
     # Dataset configuration
-    parser.add_argument("--dataset", type=str, default="Borise/CaptionQA",
+    parser.add_argument("--dataset", type=str, default="/mnt/data-alpha-sg-02/team-agent/ai_glasses/datasets/CaptionQA",
                        help="HuggingFace dataset name (default: Borise/CaptionQA)")
     parser.add_argument("--split", type=str, default="all",
                        choices=["natural", "document", "ecommerce", "embodiedai", "all"],
@@ -486,10 +595,17 @@ def main():
                        help="Path to caption JSON file ({img_key: caption})")
     
     # Output
-    parser.add_argument("--output-path", type=str, required=True,
-                       help="Path to save evaluation results")
+    parser.add_argument("--output-path", type=str, default=None,
+                       help="Path to save evaluation results (default: cap_<prompt>-<caption_model>__qa_<model_base>.json)")
     
     # Evaluation parameters
+    parser.add_argument("--model", type=str, default=DEFAULT_EVAL_MODEL,
+                       help="Model to use for evaluation")
+    parser.add_argument("--backend", type=str, default="vllm",
+                       choices=["vllm", "transformers"],
+                       help="Backend to use (default: vllm)")
+    parser.add_argument("--tp-size", type=int, default=1,
+                       help="Tensor parallel size for vLLM inference (default: 1)")
     parser.add_argument("--max-tokens", type=int, default=4,
                        help="Maximum tokens for response (default: 4)")
     parser.add_argument("--seed", type=int, default=0,
@@ -503,6 +619,9 @@ def main():
     if not os.path.exists(args.caption_path):
         print(f"Error: Caption file {args.caption_path} does not exist")
         return
+    if not args.output_path:
+        args.output_path = derive_output_path(args.caption_path, args.model)
+        print(f"Auto output path: {args.output_path}")
     
     evaluate_qa_with_captions(args)
 
