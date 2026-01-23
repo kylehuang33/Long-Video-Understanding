@@ -1,0 +1,342 @@
+{
+  "Processed-0430e208-5f96-4dbd-8494-81869822c345": {
+    "qid": "Processed-0430e208-5f96-4dbd-8494-81869822c345",
+    "question": "Is the dotted line a line of symmetry?",
+    "choices": [
+      "yes",
+      "no"
+    ],
+    "gt_answer": "\\boxed{A}",
+    "gt_letter": "A",
+    "predicted_letter": "A",
+    "model_output": "A",
+    "is_correct": true,
+    "category": "(GradeSchool) Geometric",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-0430e208-5f96-4dbd-8494-81869822c345-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-4eefca2c-d117-493e-b05e-19847197f26c": {
+    "qid": "Processed-4eefca2c-d117-493e-b05e-19847197f26c",
+    "question": "The clocks show two things Lily did Tuesday evening. Which did Lily do earlier?",
+    "choices": [
+      "ate dinner",
+      "watched a movie"
+    ],
+    "gt_answer": "\\boxed{B}",
+    "gt_letter": "B",
+    "predicted_letter": "A",
+    "model_output": "A",
+    "is_correct": false,
+    "category": "Spatial Reasoning",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-4eefca2c-d117-493e-b05e-19847197f26c-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-5cb29a4f-240d-4f1f-a063-b7fd922ee9e9": {
+    "qid": "Processed-5cb29a4f-240d-4f1f-a063-b7fd922ee9e9",
+    "question": "What fraction of the shapes are squares?",
+    "choices": [
+      "5/10",
+      "3/7",
+      "3/9",
+      "5/9"
+    ],
+    "gt_answer": "\\boxed{A}",
+    "gt_letter": "A",
+    "predicted_letter": "D",
+    "model_output": "D",
+    "is_correct": false,
+    "category": "(GradeSchool) Geometric",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-5cb29a4f-240d-4f1f-a063-b7fd922ee9e9-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-bba2265d-739f-4f64-8a21-039a48cde582": {
+    "qid": "Processed-bba2265d-739f-4f64-8a21-039a48cde582",
+    "question": "How many cans are there?",
+    "choices": [],
+    "gt_answer": "\\boxed{100}",
+    "gt_letter": null,
+    "predicted_letter": null,
+    "model_output": "To determine the total number of cans, we can count the number of rows and columns.\n\nLooking at the image:\n\n- There are **10 rows** of cans.\n- Each row contains **8 cans**.\n\nSo, the total number of cans is:\n\n**10 rows × 8 cans per row = 80 cans**\n\n✅ **Answer: 80**",
+    "is_correct": false,
+    "category": "Spatial Reasoning",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-bba2265d-739f-4f64-8a21-039a48cde582-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-45a6e75a-124a-4ff6-adda-5b1f518d13af": {
+    "qid": "Processed-45a6e75a-124a-4ff6-adda-5b1f518d13af",
+    "question": "How many squares are there?",
+    "choices": [],
+    "gt_answer": "\\boxed{100}",
+    "gt_letter": null,
+    "predicted_letter": null,
+    "model_output": "To determine the total number of squares in the image, we can analyze the structure.\n\nThe image is composed of a grid of smaller, identical pink squares.\n\n- The grid has **10 rows**.\n- Each row contains **10 squares**.\n\nSo, the total number of squares is:\n\n**10 rows × 10 squares per row = 100 squares**\n\n✅ **Final Answer: 100**",
+    "is_correct": false,
+    "category": "(GradeSchool) Geometric",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-45a6e75a-124a-4ff6-adda-5b1f518d13af-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-1cd8a0fe-2bfe-4f8a-99e4-cae1dffa9e96": {
+    "qid": "Processed-1cd8a0fe-2bfe-4f8a-99e4-cae1dffa9e96",
+    "question": "How many diamonds are there?",
+    "choices": [],
+    "gt_answer": "\\boxed{20}",
+    "gt_letter": null,
+    "predicted_letter": null,
+    "model_output": "Looking at the image, we can see two rows of pink diamonds.\n\n- The top row has 10 diamonds.\n- The bottom row also has 10 diamonds.\n\nTo find the total number of diamonds, we add the diamonds from both rows:\n\n10 (top row) + 10 (bottom row) = 20\n\nTherefore, there are **20** diamonds in total.",
+    "is_correct": false,
+    "category": "(GradeSchool) Geometric",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-1cd8a0fe-2bfe-4f8a-99e4-cae1dffa9e96-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-ff5b50e1-f4ea-418b-8931-57e53c259b9a": {
+    "qid": "Processed-ff5b50e1-f4ea-418b-8931-57e53c259b9a",
+    "question": "Is the number of flowers even or odd?",
+    "choices": [
+      "odd",
+      "even"
+    ],
+    "gt_answer": "\\boxed{B}",
+    "gt_letter": "B",
+    "predicted_letter": "B",
+    "model_output": "B",
+    "is_correct": true,
+    "category": "(GradeSchool) Non-Geo Math",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-ff5b50e1-f4ea-418b-8931-57e53c259b9a-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-2575f788-4060-4e97-b033-471926046d20": {
+    "qid": "Processed-2575f788-4060-4e97-b033-471926046d20",
+    "question": "Is the number of diamonds even or odd?",
+    "choices": [
+      "odd",
+      "even"
+    ],
+    "gt_answer": "\\boxed{B}",
+    "gt_letter": "B",
+    "predicted_letter": "B",
+    "model_output": "B",
+    "is_correct": true,
+    "category": "Spatial Reasoning",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-2575f788-4060-4e97-b033-471926046d20-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-afcc29e9-8d9a-4a0f-ae00-ab40d51a3f56": {
+    "qid": "Processed-afcc29e9-8d9a-4a0f-ae00-ab40d51a3f56",
+    "question": "Is the number of triangles even or odd?",
+    "choices": [
+      "odd",
+      "even"
+    ],
+    "gt_answer": "\\boxed{B}",
+    "gt_letter": "B",
+    "predicted_letter": "B",
+    "model_output": "B",
+    "is_correct": true,
+    "category": "(GradeSchool) Geometric",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-afcc29e9-8d9a-4a0f-ae00-ab40d51a3f56-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-8cb996ff-d19f-40e1-9a6a-bd3539adfb9f": {
+    "qid": "Processed-8cb996ff-d19f-40e1-9a6a-bd3539adfb9f",
+    "question": "How many more squares are there than triangles?",
+    "choices": [],
+    "gt_answer": "\\boxed{4 - 3 = 1}",
+    "gt_letter": null,
+    "predicted_letter": "A",
+    "model_output": "We are given a sequence of shapes:\n\n- Green triangles: 3 (positions 1, 2, and 5)\n- Pink squares: 4 (positions 3, 4, 6, and 7)\n\nWe are asked: **How many more squares are there than triangles?**\n\nSo, subtract the number of triangles from the number of squares:\n\n> 4 squares - 3 triangles = **1**\n\n✅ **Answer: 1**",
+    "is_correct": false,
+    "category": "Spatial Reasoning",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-8cb996ff-d19f-40e1-9a6a-bd3539adfb9f-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-a8f64cdc-a6d2-4b94-8194-3614f1d42ba5": {
+    "qid": "Processed-a8f64cdc-a6d2-4b94-8194-3614f1d42ba5",
+    "question": "Are there any shapes that are not pentagons?",
+    "choices": [],
+    "gt_answer": "\\boxed{No}",
+    "gt_letter": null,
+    "predicted_letter": null,
+    "model_output": "No, all the shapes in the image are pentagons.\n\nA pentagon is a polygon with five sides and five angles. In the image, every shape has exactly five sides, confirming that they are all pentagons.\n\nTherefore, there are no shapes that are not pentagons.",
+    "is_correct": false,
+    "category": "(GradeSchool) Geometric",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-a8f64cdc-a6d2-4b94-8194-3614f1d42ba5-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-40ec1a41-7d05-418b-adaf-5e69ecc47638": {
+    "qid": "Processed-40ec1a41-7d05-418b-adaf-5e69ecc47638",
+    "question": "If you add 3 dots to the second row, how many dots will there be in total?",
+    "choices": [],
+    "gt_answer": "\\boxed{15}",
+    "gt_letter": null,
+    "predicted_letter": null,
+    "model_output": "Let's break this down step by step.\n\nFirst, count the dots in the image:\n\n- There are **2 rows**.\n- Each row has **5 dots**, so that’s 2 × 5 = **10 dots**.\n- Then, there are **2 extra dots** to the right of the grid.\n\nSo total dots currently = 10 + 2 = **12 dots**.\n\nNow, the question says: **If you add 3 dots to the second row**.\n\nThat means we are adding 3 more dots to the second row.\n\nSo, new total = current total + 3 =",
+    "is_correct": false,
+    "category": "Spatial Reasoning",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-40ec1a41-7d05-418b-adaf-5e69ecc47638-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-65d5feaa-714b-4a86-97e4-dc72802c4593": {
+    "qid": "Processed-65d5feaa-714b-4a86-97e4-dc72802c4593",
+    "question": "Are there more berries with two leaves or with one leaf?",
+    "choices": [],
+    "gt_answer": "\\boxed{Two leaves}",
+    "gt_letter": null,
+    "predicted_letter": null,
+    "model_output": "To determine whether there are more berries with two leaves or with one leaf, let’s carefully examine the grid.\n\nThe image is a grid of berries arranged in rows and columns. Each berry is in its own cell, and we can count how many have one leaf and how many have two leaves.\n\nLooking at the grid:\n\n- **Rows 1, 2, 3, 4, 5, 6, 7, 8, 9** — each row has 9 berries.\n- **Row 10** — this row has 9 berries as well.\n\nWait — let’s count the rows. Actually",
+    "is_correct": false,
+    "category": "Tables/Diagrams/Charts",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-65d5feaa-714b-4a86-97e4-dc72802c4593-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-c0c920a3-423f-4ba0-b8d3-a1a0868ce80e": {
+    "qid": "Processed-c0c920a3-423f-4ba0-b8d3-a1a0868ce80e",
+    "question": "How many paper clips are partially visible?",
+    "choices": [],
+    "gt_answer": "\\boxed{2}",
+    "gt_letter": null,
+    "predicted_letter": "A",
+    "model_output": "Looking at the image, we can count the paper clips:\n\n- There is one paper clip on the far left, fully visible.\n- There are two paper clips in the center, both fully visible.\n- There is one paper clip on the far right, which is partially cut off by the edge of the image.\n\nThe question asks for paper clips that are **partially visible**. The paper clip on the far right is only partially visible, as its right end is cut off by the frame.\n\nTherefore, there is **1** paper clip that is partially visible.\n\n**Answer: 1**",
+    "is_correct": false,
+    "category": "Spatial Reasoning",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-c0c920a3-423f-4ba0-b8d3-a1a0868ce80e-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-d99cc683-aa19-40f6-873c-dd952ccb23e5": {
+    "qid": "Processed-d99cc683-aa19-40f6-873c-dd952ccb23e5",
+    "question": "How many fish are facing right?",
+    "choices": [],
+    "gt_answer": "\\boxed{1}",
+    "gt_letter": null,
+    "predicted_letter": "A",
+    "model_output": "Looking at the image, we have three blue fish, each with a yellow fin and a yellow mouth area.\n\n- The top-left fish is facing right.\n- The top-right fish is facing right.\n- The bottom-left fish is facing right.\n\nAll three fish are oriented with their heads pointing to the right.\n\nTherefore, the number of fish facing right is **3**.",
+    "is_correct": false,
+    "category": "Spatial Reasoning",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-d99cc683-aa19-40f6-873c-dd952ccb23e5-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-bbe40cbe-75ca-4319-aafd-56212071f557": {
+    "qid": "Processed-bbe40cbe-75ca-4319-aafd-56212071f557",
+    "question": "If two shapes are added, how many sides will there be in total?",
+    "choices": [],
+    "gt_answer": "\\boxed{35}",
+    "gt_letter": null,
+    "predicted_letter": "A",
+    "model_output": "We are given a grid with **five orange pentagons** in the top row. Each pentagon has **5 sides**.\n\nSo, total number of sides from the five pentagons is:  \n**5 pentagons × 5 sides each = 25 sides**\n\nNow, **two more shapes are added**. The problem does not specify what kind of shapes they are, but since the context is about counting sides and the original shapes are pentagons, it is reasonable to assume the added shapes are **also pentagons** (as no other information is given).\n\nSo, adding two more pentagons",
+    "is_correct": false,
+    "category": "(GradeSchool) Geometric",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-bbe40cbe-75ca-4319-aafd-56212071f557-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-6e84034a-008a-463f-a597-15515ed3da60": {
+    "qid": "Processed-6e84034a-008a-463f-a597-15515ed3da60",
+    "question": "How many crabs are there in the image?",
+    "choices": [],
+    "gt_answer": "\\boxed{4}",
+    "gt_letter": null,
+    "predicted_letter": null,
+    "model_output": "There are **4 crabs** in the image.\n\nThe crabs are located in the first group of icons, from left to right:\n\n- First crab (leftmost)\n- Second crab\n- Third crab\n- Fourth crab (just before the boats)\n\nAfter that, there is a crab again, but it’s part of the second group (with the boats), so we count only the first group as \"first\" per the question’s context.\n\n✅ Final answer: **4**",
+    "is_correct": false,
+    "category": "Spatial Reasoning",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-6e84034a-008a-463f-a597-15515ed3da60-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-37861b2f-1abf-4cf9-a7ea-8c318f72d9b1": {
+    "qid": "Processed-37861b2f-1abf-4cf9-a7ea-8c318f72d9b1",
+    "question": "How many squares are larger than the smallest square?",
+    "choices": [],
+    "gt_answer": "\\boxed{2}",
+    "gt_letter": null,
+    "predicted_letter": null,
+    "model_output": "Looking at the image, there are three green squares.\n\nAll three squares appear to be **identical in size** — they are all the same dimension and shape.\n\nTherefore, there are **zero squares** that are larger than the smallest square, because there is no smallest square — all are equal.\n\n---\n\n**Answer: 0**",
+    "is_correct": false,
+    "category": "Spatial Reasoning",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-37861b2f-1abf-4cf9-a7ea-8c318f72d9b1-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-1fa17677-0cb2-4ab0-972c-83e27e5408ed": {
+    "qid": "Processed-1fa17677-0cb2-4ab0-972c-83e27e5408ed",
+    "question": "If each dog needs two bones, how many more bones are needed?",
+    "choices": [],
+    "gt_answer": "\\boxed{1}",
+    "gt_letter": null,
+    "predicted_letter": "A",
+    "model_output": "Looking at the image, there is **one dog** and **one bone**.\n\nIf each dog needs **two bones**, then for one dog, we need:\n\n> 2 bones\n\nBut we only have **1 bone**.\n\nSo, the number of **more bones needed** is:\n\n> 2 - 1 = **1 bone**\n\n✅ **Answer: 1**",
+    "is_correct": false,
+    "category": "(GradeSchool) Non-Geo Math",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-1fa17677-0cb2-4ab0-972c-83e27e5408ed-0.jpg"
+    ],
+    "num_images": 1
+  },
+  "Processed-ade09b26-b199-4e0a-8f49-437b376f9e00": {
+    "qid": "Processed-ade09b26-b199-4e0a-8f49-437b376f9e00",
+    "question": "How many birds are facing to the left?",
+    "choices": [],
+    "gt_answer": "\\boxed{5}",
+    "gt_letter": null,
+    "predicted_letter": "A",
+    "model_output": "Looking at the image, we can see a row of 10 birds.\n\nEach bird is depicted with a distinct orientation. The key detail is the direction the bird is facing — specifically, the direction of its head and beak.\n\n- The **first bird** (on the far left) is facing to the **left**.\n- The **second bird** is facing to the **right**.\n- The **third bird** is facing to the **left**.\n- The **fourth bird** is facing to the **right**.\n- The **fifth bird** is facing to the **left**.\n- The **",
+    "is_correct": false,
+    "category": "Spatial Reasoning",
+    "source": "Processed",
+    "image_paths": [
+      "images/Processed-ade09b26-b199-4e0a-8f49-437b376f9e00-0.jpg"
+    ],
+    "num_images": 1
+  }
+}
