@@ -103,6 +103,39 @@ def AMD_openai_client(model_id: str, amd: bool = False) -> Any:
         return _openai.OpenAI(api_key=api_key)
 
 
+def AMD_azure_openai_client() -> Any:
+    """Create an Azure OpenAI client using Azure credentials.
+
+    Requires environment variables:
+    - AZURE_OPENAI_API_KEY: Your Azure OpenAI API key
+    - AZURE_OPENAI_ENDPOINT: Your Azure OpenAI endpoint (e.g., https://YOUR-RESOURCE.openai.azure.com)
+    """
+    if _openai is None:
+        raise OptionalDependencyError(
+            "openai is not installed. pip install 'openai>=1.0.0'"
+        )
+
+    api_key = os.getenv("AZURE_OPENAI_API_KEY")
+    if not api_key:
+        raise ValueError(
+            "AZURE_OPENAI_API_KEY environment variable is not set."
+        )
+
+    endpoint = os.getenv("AZURE_OPENAI_ENDPOINT", "").rstrip("/")
+    if not endpoint:
+        raise ValueError(
+            "AZURE_OPENAI_ENDPOINT environment variable is not set."
+        )
+
+    # Azure OpenAI uses the OpenAI SDK with specific configuration
+    client = _openai.OpenAI(
+        api_key=api_key,
+        base_url=f"{endpoint}/openai/v1/",
+    )
+
+    return client
+
+
 def AMD_llama_client() -> Any:
     """Create OpenAI client for AMD OnPrem Llama models."""
     if _openai is None:
@@ -1281,6 +1314,7 @@ def AMD_qwenvl_call(
 __all__ = [
     "AMD_openai_client",
     "AMD_openai_call",
+    "AMD_azure_openai_client",
     "AMD_llama_client",
     "AMD_gemini_client",
     "AMD_gemini_call",

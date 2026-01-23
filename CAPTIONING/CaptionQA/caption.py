@@ -12,7 +12,7 @@ from PIL import Image
 from datasets import load_dataset
 from pipeline.utils import load_json, encode_image
 from pipeline.api import (
-    AMD_openai_client, AMD_openai_call, AMD_llama_client,
+    AMD_openai_client, AMD_openai_call, AMD_azure_openai_client, AMD_llama_client,
     AMD_gemini_client, AMD_gemini_call,
     AMD_claude_client, AMD_claude_call,
     AMD_vllm_chat_client, AMD_vllm_multimodal_call,
@@ -33,6 +33,9 @@ def _sleep_backoff(attempt: int, base: float = 0.5, factor: float = 2.0, jitter:
 def detect_model_backend(model: str) -> str:
     """Detect which API backend to use based on model name."""
     model_lower = model.lower()
+    # Check for Azure OpenAI (explicit "azure" mention)
+    if 'azure' in model_lower:
+        return 'azure_openai'
     if 'qwen3-vl' in model_lower or 'qwen3vl' in model_lower:
         return 'qwenvl'
     if 'gemini' in model_lower:
@@ -223,9 +226,9 @@ def generate_caption(
                     temperature=temperature
                 )
                 return caption.strip() if caption else None
-                
-            else:  # OpenAI backend
-                # Encode all images for OpenAI
+
+            elif backend in ['openai', 'azure_openai']:  # OpenAI and Azure OpenAI backend
+                # Encode all images for OpenAI/Azure OpenAI
                 encoded_images = [encode_image(img_path) for img_path in image_paths]
                 
                 # Create content list with all images
@@ -248,9 +251,6 @@ def generate_caption(
                     client,
                     model,
                     messages=messages,
-                    temperature=temperature,
-                    stream=False,
-                    max_tokens=max_tokens
                 )
                 
                 caption = completion.choices[0].message.content.strip()
@@ -285,7 +285,9 @@ def caption_images(args):
         backend = 'vllm_server'
     print(f"Using {backend} backend for model {args.model}")
     
-    if backend == 'gemini':
+    if backend == 'azure_openai':
+        client = AMD_azure_openai_client()
+    elif backend == 'gemini':
         client = AMD_gemini_client()
     elif backend == 'claude':
         client = AMD_claude_client()
@@ -386,12 +388,17 @@ def caption_images(args):
         if caption:
             # Save with dataset ID as key (e.g., "nat_001": "caption...")
             results[image_key] = caption
-            
+            print(f"✓ Generated caption for {image_key}: {caption[:50]}...", flush=True)
+
             # Save after each successful caption
-            with open(args.output_path, 'w') as f:
-                json.dump(results, f, indent=2)
+            try:
+                with open(args.output_path, 'w') as f:
+                    json.dump(results, f, indent=2)
+                print(f"✓ Saved {len(results)} captions to {args.output_path}", flush=True)
+            except Exception as e:
+                print(f"✗ Error saving results for {image_key}: {e}", flush=True)
         else:
-            print(f"Failed to generate caption for {image_key}")
+            print(f"✗ Failed to generate caption for {image_key}", flush=True)
     
     # Cleanup temporary files
     for temp_file in temp_files:
@@ -439,7 +446,7 @@ def main():
     parser.add_argument("--model", type=str, default="/mnt/data-alpha-sg-02/team-agent/ai_glasses/models/Qwen3-VL-30B-A3B-Instruct",
                        help="Model to use for captioning")
     parser.add_argument("--backend", type=str, default=None,
-                       choices=["openai", "gemini", "claude", "vllm", "vllm_server", "qwenvl"],
+                       choices=["openai", "azure_openai", "gemini", "claude", "vllm", "vllm_server", "qwenvl"],
                        help="Force backend instead of auto-detection (default: auto)")
     parser.add_argument("--temperature", type=float, default=0.7,
                        help="Sampling temperature (default: 0.7)")
@@ -469,9 +476,9 @@ def main():
     
     # Derive output path from --output-dir
     model_safe = make_model_safe(args.model)
-    out_dir = os.path.join(args.output_dir, (args.prompt or "").lower())
+    out_dir = os.path.join(args.output_dir, model_safe)
     os.makedirs(out_dir, exist_ok=True)
-    args.output_path = os.path.join(out_dir, f"{model_safe}.json")
+    args.output_path = os.path.join(out_dir, f"{model_safe}_{args.prompt.lower()}.json")
     print(f"Saving outputs to {args.output_path}...")
     
     # Run captioning

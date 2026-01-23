@@ -1,0 +1,50 @@
+i want you to write a script to do captioning.
+
+1. I will give you dataset path such as "/mnt/data-alpha-sg-02/team-agent/ai_glasses/datasets/ViRL39K/images" please make this into one of the arguments.
+2. Please do the caption for every images under this dir. and Please make a prompt_style into one arguement as below
+CAPTION_PROMPTS = {
+    'SIMPLE': "Describe this image in detail.",
+    
+    'SHORT': "Write a very short caption for the given image.",
+      
+    'LONG': "Write a very long and detailed caption describing the given image as comprehensively as possible."
+}
+3. I will use qwen3vl-4B instruct. Please read @CAPTIONING/quickstart/models_load/qwen3vl.py to know how to load the model. use the caption prompt to caption the image
+
+
+4. the output json will be {"image1_name":"caption" ... }
+
+5. all content should be generated under @CAPTIONING/Tiger-VL-Rethinker
+
+
+#################
+
+I want to write the a scirpt to do question answering.
+
+
+1. I will give you the question path (/mnt/data-alpha-sg-02/team-agent/ai_glasses/datasets/ViRL39K/39Krelease.parquet)and dataset path. they will all become arguements
+
+question will like
+columns: ['question', 'answer', 'PassRate_32BTrained', 'PassRate_7BBase', 'category', 'source', 'qid', 'image']
+                                            question  ...                                              image
+0  <image>\nIs the dotted line a line of symmetry...  ...  [images/Processed-0430e208-5f96-4dbd-8494-8186...
+1  <image>\nThe clocks show two things Lily did T...  ...  [images/Processed-4eefca2c-d117-493e-b05e-1984...
+2  <image>\nWhat fraction of the shapes are squar...  ...  [images/Processed-5cb29a4f-240d-4f1f-a063-b7fd...
+
+
+row 0 as dict:
+ {'question': '<image>\nIs the dotted line a line of symmetry?\nChoices:\n(A) yes\n(B) no', 'answer': '\\boxed{A}', 'PassRate_32BTrained': 0.1875, 'PassRate_7BBase': -1.0, 'category': '(GradeSchool) Geometric', 'source': 'Processed', 'qid': 'Processed-0430e208-5f96-4dbd-8494-81869822c345', 'image': array(['images/Processed-0430e208-5f96-4dbd-8494-81869822c345-0.jpg'],
+      dtype=object)}
+
+please get the image path by get column "image" and then os.path.join with dataset path.
+
+
+3. I will use qwen3vl-4B instruct. Please read @CAPTIONING/quickstart/models_load/qwen3vl.py to know how to load the model. and put the question. it will have answer in the question dataset. You will also need to handle the model output like @CAPTIONING/CaptionQA/qa.py. 
+
+
+
+4. please get the output json and metrics json (total accuarcy and category accruacy)
+
+5. all content should be generated under @CAPTIONING/Tiger-VL-Rethinker/QA
+
+

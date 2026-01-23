@@ -481,82 +481,93 @@ def evaluate_qa_with_captions(args):
                     )
                     progress.update(1)
 
-        # Score and append results for this batch
-        for resp, i in zip(batch_responses, idxs):
-            image_key, q_idx, perm, n_opts, gt_idx_orig, q_data = meta[i]
+            # Score and append results for this batch
+            for resp, i in zip(batch_responses, idxs):
+                image_key, q_idx, perm, n_opts, gt_idx_orig, q_data = meta[i]
 
-            letter = extract_letter(resp, n_opts)
-            is_correct = False
-            is_cannot_answer = False
-            model_answer_text = None
-            score = 0.0
+                letter = extract_letter(resp, n_opts)
+                is_correct = False
+                is_cannot_answer = False
+                model_answer_text = None
+                score = 0.0
 
-            original_choices = q_data['choices']
-            n_original_choices = len(original_choices)
-            choices_with_option = add_cannot_answer_option(q_data['question'], original_choices)
+                original_choices = q_data['choices']
+                n_original_choices = len(original_choices)
+                choices_with_option = add_cannot_answer_option(q_data['question'], original_choices)
 
-            if letter is not None:
-                shuf_idx = LETTER_ALPH.find(letter)
-                if 0 <= shuf_idx < len(perm):
-                    orig_idx = perm[shuf_idx]
+                if letter is not None:
+                    shuf_idx = LETTER_ALPH.find(letter)
+                    if 0 <= shuf_idx < len(perm):
+                        orig_idx = perm[shuf_idx]
 
-                    if orig_idx < len(choices_with_option):
-                        model_answer_text = str(choices_with_option[orig_idx])
+                        if orig_idx < len(choices_with_option):
+                            model_answer_text = str(choices_with_option[orig_idx])
 
-                        if model_answer_text == CANNOT_ANSWER_TEXT:
-                            is_cannot_answer = True
-                            score = (1.0 / n_original_choices) + 0.05
-                        elif orig_idx == gt_idx_orig:
-                            is_correct = True
-                            score = 1.0
-                        else:
-                            score = 0.0
+                            if model_answer_text == CANNOT_ANSWER_TEXT:
+                                is_cannot_answer = True
+                                score = (1.0 / n_original_choices) + 0.05
+                            elif orig_idx == gt_idx_orig:
+                                is_correct = True
+                                score = 1.0
+                            else:
+                                score = 0.0
 
-            if image_key not in results:
-                results[image_key] = []
+                if image_key not in results:
+                    results[image_key] = []
 
-            result_entry = {
-                "question": q_data['question'],
-                "choices": q_data['choices'],
-                "ground_truth": q_data['answer'],
-                "model_answer": model_answer_text,
-                "model_response": resp,
-                "is_correct": is_correct,
-                "is_cannot_answer": is_cannot_answer,
-                "score": round(score, 4),
-                "category": q_data.get('category', '')
-            }
-            results[image_key].append(result_entry)
+                result_entry = {
+                    "question": q_data['question'],
+                    "choices": q_data['choices'],
+                    "ground_truth": q_data['answer'],
+                    "model_answer": model_answer_text,
+                    "model_response": resp,
+                    "is_correct": is_correct,
+                    "is_cannot_answer": is_cannot_answer,
+                    "score": round(score, 4),
+                    "category": q_data.get('category', '')
+                }
+                results[image_key].append(result_entry)
 
-            # Save after each batch
+            # Save results after each batch
             with open(args.output_path, "w", encoding="utf-8") as f:
                 json.dump(results, f, indent=2, ensure_ascii=False)
-            print(f"Saved {sum(len(v) for v in results.values())} results -> {args.output_path}")
-            
+
+            # Compute and save metrics
+            metrics = compute_metrics(results)
+            metrics['model'] = model_id
+            metrics['split'] = args.split
+            metrics['caption_path'] = args.caption_path
+
+            metrics_path = args.output_path.replace('.json', '_metrics.json')
+            with open(metrics_path, "w", encoding="utf-8") as f:
+                json.dump(metrics, f, indent=2, ensure_ascii=False)
+
             # Print running totals
-            running_total = sum(len(v) for v in results.values())
-            running_total_score = sum(sum(item.get("score", 0.0) for item in v) for v in results.values())
-            running_correct = sum(
-                sum(1 for item in v if item.get("is_correct")) for v in results.values()
-            )
-            running_cannot = sum(
-                sum(1 for item in v if item.get("is_cannot_answer")) for v in results.values()
-            )
-            running_avg = (running_total_score / running_total) if running_total else 0.0
-            running_acc = (running_correct / running_total) if running_total else 0.0
             print(
-                f"[progress] processed={running_total} | total_score={running_total_score:.2f} "
-                f"| avg_score={running_avg:.4f} | accuracy={running_acc:.2%} | cannot_answer={running_cannot}"
+                f"[batch saved] processed={metrics['total_questions']} | total_score={metrics['total_score']:.2f} "
+                f"| avg_score={metrics['average_score']:.4f} | accuracy={metrics['overall_accuracy']:.2%} "
+                f"| cannot_answer={metrics['cannot_answer_count']}"
             )
     finally:
         progress.close()
 
-    # Final summary
+    # Final summary and save final metrics
     print_final_summary(results, model_id)
 
+    # Save final metrics
+    metrics = compute_metrics(results)
+    metrics['model'] = model_id
+    metrics['split'] = args.split
+    metrics['caption_path'] = args.caption_path
 
-def print_final_summary(results: Dict[str, List], model_name: str):
-    """Print final evaluation summary."""
+    metrics_path = args.output_path.replace('.json', '_metrics.json')
+    with open(metrics_path, "w", encoding="utf-8") as f:
+        json.dump(metrics, f, indent=2, ensure_ascii=False)
+    print(f"\nMetrics saved to: {metrics_path}")
+
+
+def compute_metrics(results: Dict[str, List]) -> Dict[str, Any]:
+    """Compute evaluation metrics from results."""
     total_questions = sum(len(v) for v in results.values())
     total_score = sum(sum(item.get("score", 0.0) for item in v) for v in results.values())
     correct_answers = sum(
@@ -568,21 +579,69 @@ def print_final_summary(results: Dict[str, List], model_name: str):
     overall_accuracy = correct_answers / total_questions if total_questions > 0 else 0.0
     average_score = total_score / total_questions if total_questions > 0 else 0.0
 
+    # Compute per-category metrics
+    category_metrics = {}
+    for image_key, items in results.items():
+        for item in items:
+            category = item.get('category', 'unknown')
+            if category not in category_metrics:
+                category_metrics[category] = {
+                    'total': 0,
+                    'correct': 0,
+                    'cannot_answer': 0,
+                    'total_score': 0.0
+                }
+            category_metrics[category]['total'] += 1
+            category_metrics[category]['total_score'] += item.get('score', 0.0)
+            if item.get('is_correct'):
+                category_metrics[category]['correct'] += 1
+            if item.get('is_cannot_answer'):
+                category_metrics[category]['cannot_answer'] += 1
+
+    # Compute accuracy and average score per category
+    for category, stats in category_metrics.items():
+        stats['accuracy'] = stats['correct'] / stats['total'] if stats['total'] > 0 else 0.0
+        stats['average_score'] = stats['total_score'] / stats['total'] if stats['total'] > 0 else 0.0
+
+    return {
+        'total_questions': total_questions,
+        'correct_answers': correct_answers,
+        'overall_accuracy': round(overall_accuracy, 4),
+        'cannot_answer_count': cannot_answer_count,
+        'total_score': round(total_score, 2),
+        'average_score': round(average_score, 4),
+        'category_metrics': category_metrics
+    }
+
+
+def print_final_summary(results: Dict[str, List], model_name: str):
+    """Print final evaluation summary."""
+    metrics = compute_metrics(results)
+
     print(f"\n{'='*60}")
     print(f"Evaluation Results:")
     print(f"{'='*60}")
     print(f"Model: {model_name}")
-    print(f"Total questions: {total_questions}")
-    print(f"Correct answers: {correct_answers} ({overall_accuracy:.2%})")
-    print(f"'Cannot answer' selections: {cannot_answer_count}")
-    print(f"Total score: {total_score:.2f} / {total_questions}")
-    print(f"Average score: {average_score:.4f}")
+    print(f"Total questions: {metrics['total_questions']}")
+    print(f"Correct answers: {metrics['correct_answers']} ({metrics['overall_accuracy']:.2%})")
+    print(f"'Cannot answer' selections: {metrics['cannot_answer_count']}")
+    print(f"Total score: {metrics['total_score']:.2f} / {metrics['total_questions']}")
+    print(f"Average score: {metrics['average_score']:.4f}")
     print(f"{'='*60}")
     print(f"\nScoring rules:")
     print(f"  - Correct answer: 1.0 point")
     print(f"  - Incorrect answer: 0.0 points")
     print(f"  - 'Cannot answer': 1/n_choices + 0.05 points")
     print(f"{'='*60}")
+
+    # Print per-category metrics if available
+    if metrics['category_metrics']:
+        print(f"\nPer-category metrics:")
+        print(f"{'='*60}")
+        for category, stats in sorted(metrics['category_metrics'].items()):
+            print(f"{category}: {stats['correct']}/{stats['total']} ({stats['accuracy']:.2%}), "
+                  f"avg_score={stats['average_score']:.4f}, cannot_answer={stats['cannot_answer']}")
+        print(f"{'='*60}")
 
 
 def main():
