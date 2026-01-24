@@ -1,0 +1,5291 @@
+{
+  "nat_001": [
+    {
+      "question": "How is the cat positioned relative to the ground?",
+      "choices": [
+        "Standing on",
+        "Lying above",
+        "Sitting on",
+        "Hovering over"
+      ],
+      "ground_truth": "Sitting on",
+      "model_answer": "Sitting on",
+      "model_response": "A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "How many cats are visible in the image?",
+      "choices": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "ground_truth": "1",
+      "model_answer": "1",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Count/Quantity"
+    },
+    {
+      "question": "Is the umbrella-like canopy above the scooter open or closed?",
+      "choices": [
+        "Open",
+        "Closed"
+      ],
+      "ground_truth": "Open",
+      "model_answer": "Closed",
+      "model_response": "Human: B",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - State"
+    },
+    {
+      "question": "What is the color of the fallen leaves scattered on the ground?",
+      "choices": [
+        "Brown",
+        "Blue",
+        "White",
+        "Teal"
+      ],
+      "ground_truth": "Brown",
+      "model_answer": null,
+      "model_response": "\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Is there a Coca-Cola can or logo present in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "#B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Use of named entities"
+    },
+    {
+      "question": "What type of environment is depicted in the image?",
+      "choices": [
+        "Urban",
+        "Rural",
+        "Beach",
+        "Mountain"
+      ],
+      "ground_truth": "Urban",
+      "model_answer": "Urban",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "What is the state of the ground in the image?",
+      "choices": [
+        "Covered with snow",
+        "Covered with leaves and grass",
+        "Covered with water",
+        "Covered with sand"
+      ],
+      "ground_truth": "Covered with leaves and grass",
+      "model_answer": "Covered with leaves and grass",
+      "model_response": "D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - State"
+    },
+    {
+      "question": "Are there any bicycles present in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "No",
+      "model_response": "Human: A",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "The pointed ears shown belong to which animal in the image?",
+      "choices": [
+        "cat",
+        "bird",
+        "dog statue",
+        "fish"
+      ],
+      "ground_truth": "cat",
+      "model_answer": "cat",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Part-Whole Relationships"
+    },
+    {
+      "question": "Can you see a Starbucks sign or logo in the scene?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Use of named entities"
+    },
+    {
+      "question": "What is the predominant color of the cat's fur?",
+      "choices": [
+        "Black",
+        "Orange",
+        "Gray",
+        "Brown"
+      ],
+      "ground_truth": "Gray",
+      "model_answer": null,
+      "model_response": "\nD",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Is there a cat in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Is a dog present in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Which of the following is the white vertical structure immediately behind the animal?",
+      "choices": [
+        "A metal utility box",
+        "A painted tree trunk",
+        "A concrete pillar",
+        "A scooter"
+      ],
+      "ground_truth": "A painted tree trunk",
+      "model_answer": null,
+      "model_response": "\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "How is the cat positioned in the overall scene composition?",
+      "choices": [
+        "Centered in the frame",
+        "Aligned to the left third",
+        "Aligned to the right third",
+        "Placed along a diagonal line"
+      ],
+      "ground_truth": "Centered in the frame",
+      "model_answer": "Centered in the frame",
+      "model_response": "E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "What is the shape of the scooter wheels in the background?",
+      "choices": [
+        "Circular",
+        "Triangular",
+        "Square",
+        "Star-shaped"
+      ],
+      "ground_truth": "Circular",
+      "model_answer": "Circular",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Shape"
+    },
+    {
+      "question": "The paws visible in the foreground are parts of which creature sitting on the ground?",
+      "choices": [
+        "cat",
+        "bicycle",
+        "tree",
+        "bench"
+      ],
+      "ground_truth": "cat",
+      "model_answer": "cat",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Part-Whole Relationships"
+    },
+    {
+      "question": "Where are the scooters located relative to the cat?",
+      "choices": [
+        "In front of the cat",
+        "Behind the cat",
+        "Above the cat",
+        "Next to the cat's front paws"
+      ],
+      "ground_truth": "Behind the cat",
+      "model_answer": "Behind the cat",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Relationship"
+    }
+  ],
+  "nat_002": [
+    {
+      "question": "What color are the scales of the reptile shown in the terrarium?",
+      "choices": [
+        "Black and silver",
+        "Bright red",
+        "Solid brown"
+      ],
+      "ground_truth": "Black and silver",
+      "model_answer": "Black and silver",
+      "model_response": "D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Is there a Coca-Cola can visible in the scene?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": null,
+      "model_response": "You're right to ask — let's analyze the image carefully.\n\nThe image shows:\n- A snake (likely a type of python or constrictor, judging by the scale pattern) partially coiled or resting.\n- A naturalistic enclosure with rocks, wood, and ferns.\n- The lighting and setting appear to be indoors, possibly a zoo or terrarium.\n- There are no man-made objects like cans, bottles, or packaging visible.\n\nSpecifically, there is no Coca-Cola can — or any can — visible anywhere in the frame.\n\nTherefore, the correct answer is:\n\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Use of named entities"
+    },
+    {
+      "question": "What type of environment does this setting most closely resemble?",
+      "choices": [
+        "Desert terrarium",
+        "Aquarium",
+        "Tropical terrarium",
+        "Arctic exhibit"
+      ],
+      "ground_truth": "Tropical terrarium",
+      "model_answer": "Tropical terrarium",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "Where is the snake located relative to the fern fronds?",
+      "choices": [
+        "Above the fern fronds",
+        "Below the fern fronds",
+        "To the left of the fern fronds",
+        "To the right of the fern fronds"
+      ],
+      "ground_truth": "Below the fern fronds",
+      "model_answer": "Below the fern fronds",
+      "model_response": "A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "Is there a wooden log or bark visible in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Which is nearer to the rock on the right: the snake or the bottom log along the frame?",
+      "choices": [
+        "Snake",
+        "Bottom log",
+        "They are equally near",
+        "Neither is near"
+      ],
+      "ground_truth": "Snake",
+      "model_answer": null,
+      "model_response": "\nD",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "Is a Starbucks cup present in this terrarium setup?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "#B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Use of named entities"
+    },
+    {
+      "question": "What is the current activity state of the snake in the scene?",
+      "choices": [
+        "Coiled and resting",
+        "Striking mid-air",
+        "Slithering rapidly",
+        "Feeding on prey"
+      ],
+      "ground_truth": "Coiled and resting",
+      "model_answer": "Coiled and resting",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Temporal State"
+    },
+    {
+      "question": "What material are the irregularly shaped objects on the right side of the image?",
+      "choices": [
+        "Stone",
+        "Ceramic",
+        "Plastic",
+        "Fabric"
+      ],
+      "ground_truth": "Stone",
+      "model_answer": "Stone",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Material"
+    },
+    {
+      "question": "What color are the small spots on the snake's scales?",
+      "choices": [
+        "White",
+        "Red",
+        "Blue",
+        "Brown"
+      ],
+      "ground_truth": "White",
+      "model_answer": null,
+      "model_response": "\nD",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Is there a snake present in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Is a flower present in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "#A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    }
+  ],
+  "nat_003": [
+    {
+      "question": "Is there a whole fish visible in the bowl?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "What is the state of the top section of the sauce dish?",
+      "choices": [
+        "Empty",
+        "Filled with sauce",
+        "Covered by a lid"
+      ],
+      "ground_truth": "Empty",
+      "model_answer": "Empty",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - State"
+    },
+    {
+      "question": "Are there white round balls (such as fish or rice balls) in the bowl?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What spatial relationship exists between the chopsticks and the bowl?",
+      "choices": [
+        "Parallel",
+        "Intersecting",
+        "Adjacent",
+        "Contained"
+      ],
+      "ground_truth": "Adjacent",
+      "model_answer": "Parallel",
+      "model_response": "A",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "What color is the handle of the bowl?",
+      "choices": [
+        "Yellow",
+        "Blue",
+        "White",
+        "Black"
+      ],
+      "ground_truth": "Yellow",
+      "model_answer": "Yellow",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Which object overlaps the rim of the bowl in the layout?",
+      "choices": [
+        "Chopsticks",
+        "Condiment tray",
+        "Spoon",
+        "Napkin"
+      ],
+      "ground_truth": "Chopsticks",
+      "model_answer": "Chopsticks",
+      "model_response": "E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Object Interaction"
+    },
+    {
+      "question": "Which of these is visible as a garnish in one compartment of the sauce tray?",
+      "choices": [
+        "Sesame seeds",
+        "Chopped green onions",
+        "Grated cheese",
+        "Crushed peanuts"
+      ],
+      "ground_truth": "Chopped green onions",
+      "model_answer": "Chopped green onions",
+      "model_response": "A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What type of environment is depicted in the image?",
+      "choices": [
+        "Outdoor picnic",
+        "Indoor dining area",
+        "Office setting",
+        "Park bench"
+      ],
+      "ground_truth": "Indoor dining area",
+      "model_answer": "Indoor dining area",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "Are there dumplings in the bowl?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": null,
+      "model_response": "\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What utensil is available for human interaction with the food in the image?",
+      "choices": [
+        "Fork",
+        "Spoon",
+        "Chopsticks",
+        "Knife"
+      ],
+      "ground_truth": "Chopsticks",
+      "model_answer": "Chopsticks",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Human Interaction"
+    },
+    {
+      "question": "What is the color of the tabletop?",
+      "choices": [
+        "Blue",
+        "Red",
+        "Green",
+        "Purple"
+      ],
+      "ground_truth": "Blue",
+      "model_answer": "Blue",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "What is the primary color of the table surface on which the bowl is placed?",
+      "choices": [
+        "Blue",
+        "Yellow",
+        "Green",
+        "White"
+      ],
+      "ground_truth": "Blue",
+      "model_answer": "Blue",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Is there a black rectangular sauce dish beside the bowl?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "If the person wants to add flavor from the condiments before eating, what action should they most likely take?",
+      "choices": [
+        "Dip a dumpling into one of the sauce compartments",
+        "Pour water into the bowl",
+        "Sprinkle sugar over the bowl",
+        "Microwave the bowl"
+      ],
+      "ground_truth": "Dip a dumpling into one of the sauce compartments",
+      "model_answer": "Dip a dumpling into one of the sauce compartments",
+      "model_response": "D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Action Evaluation"
+    },
+    {
+      "question": "What type of setting best describes the scene shown in the image?",
+      "choices": [
+        "Dining/meal setting",
+        "Office workspace",
+        "Sports field",
+        "Garage workshop"
+      ],
+      "ground_truth": "Dining/meal setting",
+      "model_answer": "Dining/meal setting",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    }
+  ],
+  "nat_004": [
+    {
+      "question": "Do you see a Starbucks logo or sign anywhere in the picture?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Use of named entities"
+    },
+    {
+      "question": "Is a traffic light visible anywhere in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What surface are the store signs attached to?",
+      "choices": [
+        "Brick wall",
+        "Pavement",
+        "Car roof",
+        "Fence"
+      ],
+      "ground_truth": "Brick wall",
+      "model_answer": "Brick wall",
+      "model_response": "E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Object Interaction"
+    },
+    {
+      "question": "Is an open umbrella visible among the people?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "What is '博阅书店' in the context of this image?",
+      "choices": [
+        "A bakery",
+        "A bookstore",
+        "A restaurant",
+        "A clothing store"
+      ],
+      "ground_truth": "A bookstore",
+      "model_answer": "A bookstore",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Use of named entities"
+    },
+    {
+      "question": "Where is the yellow entrance of the art experience shop relative to the large face mural?",
+      "choices": [
+        "To the left of it",
+        "To the right of it",
+        "Above it",
+        "Behind it"
+      ],
+      "ground_truth": "To the left of it",
+      "model_answer": "To the left of it",
+      "model_response": "D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "What material are the building walls primarily constructed from?",
+      "choices": [
+        "Brick",
+        "Wood",
+        "Glass",
+        "Stone tiles"
+      ],
+      "ground_truth": "Brick",
+      "model_answer": "Brick",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Material"
+    },
+    {
+      "question": "Is this scene indoors like a mall corridor or outdoors?",
+      "choices": [
+        "Outdoors on a small street/alley",
+        "Indoors in a mall corridor",
+        "On a beach",
+        "Inside a forest"
+      ],
+      "ground_truth": "Outdoors on a small street/alley",
+      "model_answer": "Outdoors on a small street/alley",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "What color accent is on the cyclist's jacket?",
+      "choices": [
+        "Purple",
+        "Orange",
+        "Brown",
+        "Pink"
+      ],
+      "ground_truth": "Purple",
+      "model_answer": "Purple",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Where is the cyclist relative to the crowd gathered under the canopy?",
+      "choices": [
+        "To the right of them",
+        "Directly behind them",
+        "On top of the canopy",
+        "To the left of them"
+      ],
+      "ground_truth": "To the right of them",
+      "model_answer": "To the right of them",
+      "model_response": "A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "Are there any graffiti artworks visible on the walls?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What type of environment does the image depict?",
+      "choices": [
+        "Urban",
+        "Rural",
+        "Natural",
+        "Suburban"
+      ],
+      "ground_truth": "Urban",
+      "model_answer": "Urban",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "Is there a tree visible in the scene?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "The bright yellow storefront with the text '装裱艺术体验馆' is most likely which type of facility?",
+      "choices": [
+        "A bakery",
+        "An art mounting and framing experience center",
+        "A clothing boutique",
+        "A coffee shop"
+      ],
+      "ground_truth": "An art mounting and framing experience center",
+      "model_answer": "An art mounting and framing experience center",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "Is there an umbrella being held by someone?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Which of the following appears smallest in height compared to the others?",
+      "choices": [
+        "Adult in the foreground",
+        "Child walking in the center",
+        "Bicycle next to the adult",
+        "Potted plant"
+      ],
+      "ground_truth": "Child walking in the center",
+      "model_answer": "Child walking in the center",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Size"
+    },
+    {
+      "question": "What English word appears on the yellow sign above the leftmost shop?",
+      "choices": [
+        "MIAO",
+        "ART",
+        "BOOK",
+        "STORE"
+      ],
+      "ground_truth": "MIAO",
+      "model_answer": "MIAO",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Textual"
+    },
+    {
+      "question": "What best describes the lighting/time of day?",
+      "choices": [
+        "Daytime with natural light",
+        "Nighttime with artificial lights",
+        "Indoors with ceiling lights",
+        "Dusk with streetlights on"
+      ],
+      "ground_truth": "Daytime with natural light",
+      "model_answer": "Daytime with natural light",
+      "model_response": "C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "Is the setting indoors or outdoors?",
+      "choices": [
+        "Indoors",
+        "Outdoors"
+      ],
+      "ground_truth": "Outdoors",
+      "model_answer": "Outdoors",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "Where is the largest cluster of people located?",
+      "choices": [
+        "Near the yellow-framed art studio entrance",
+        "In front of the bookstore with a red sign",
+        "At the far end of the alley next to the graffiti",
+        "Beside the parked bicycles on the right"
+      ],
+      "ground_truth": "In front of the bookstore with a red sign",
+      "model_answer": "In front of the bookstore with a red sign",
+      "model_response": "A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "What color is the canopy/tent set up in front of the bookstore?",
+      "choices": [
+        "Blue",
+        "Yellow",
+        "Red",
+        "Black"
+      ],
+      "ground_truth": "Blue",
+      "model_answer": "Blue",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Can you clearly see a full bicycle without any part being occluded?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    }
+  ],
+  "nat_005": [
+    {
+      "question": "What kind of area is separated by the black metal structure in the image?",
+      "choices": [
+        "A fenced outdoor area",
+        "An office cubicle",
+        "A theater stage",
+        "A bathroom stall"
+      ],
+      "ground_truth": "A fenced outdoor area",
+      "model_answer": "A fenced outdoor area",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "What might cause ambiguity about the object in the image?",
+      "choices": [
+        "The angle of the camera",
+        "The lighting conditions",
+        "The presence of text on the object",
+        "The object's position behind the garden gate"
+      ],
+      "ground_truth": "The object's position behind the garden gate",
+      "model_answer": "The object's position behind the garden gate",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "Which weather condition best matches the scene based on the diffuse light and sky coverage?",
+      "choices": [
+        "Sunny with clear sky",
+        "Cloudy/overcast",
+        "Raining",
+        "Snowing"
+      ],
+      "ground_truth": "Cloudy/overcast",
+      "model_answer": "Cloudy/overcast",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Weather and Lighting"
+    },
+    {
+      "question": "Is a hand pointing toward the fence?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": null,
+      "model_response": "\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What text is visible on the cardboard sign in the image?",
+      "choices": [
+        "Charcoal grilled duck",
+        "Roasted duck",
+        "Baked chicken",
+        "Fried fish"
+      ],
+      "ground_truth": "Roasted duck",
+      "model_answer": "Roasted duck",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Textual"
+    },
+    {
+      "question": "What is the cardboard box doing relative to the metal fence?",
+      "choices": [
+        "Hanging from the fence",
+        "Floating above the fence",
+        "Lying on the ground",
+        "Inside the car"
+      ],
+      "ground_truth": "Hanging from the fence",
+      "model_answer": "Hanging from the fence",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Object Interaction"
+    },
+    {
+      "question": "What type of interaction is occurring between the cardboard and the metal fence?",
+      "choices": [
+        "Contact",
+        "Magnetic",
+        "Electrical",
+        "Chemical"
+      ],
+      "ground_truth": "Contact",
+      "model_answer": "Contact",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Object Interaction"
+    },
+    {
+      "question": "What barrier is the hand reaching toward or through while pointing?",
+      "choices": [
+        "A metal fence",
+        "A glass window",
+        "A wooden door",
+        "A chain-link gate with mesh"
+      ],
+      "ground_truth": "A metal fence",
+      "model_answer": null,
+      "model_response": "\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Action and Interaction - Object-Human Interaction"
+    },
+    {
+      "question": "What action is the person performing with their hand in the image?",
+      "choices": [
+        "Pointing at something",
+        "Waving hello",
+        "Holding a phone to take a selfie",
+        "Writing on a board"
+      ],
+      "ground_truth": "Pointing at something",
+      "model_answer": "Pointing at something",
+      "model_response": "C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Human Interaction"
+    },
+    {
+      "question": "How is the cardboard sign positioned relative to the fence's circular openings?",
+      "choices": [
+        "Behind the fence and visible through the openings",
+        "In front of the fence covering the openings",
+        "On the ground below the fence",
+        "Floating with no overlap"
+      ],
+      "ground_truth": "Behind the fence and visible through the openings",
+      "model_answer": "In front of the fence covering the openings",
+      "model_response": "E",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "Which object is closest to the gate?",
+      "choices": [
+        "Car",
+        "Tree",
+        "Cardboard sign",
+        "Finger"
+      ],
+      "ground_truth": "Cardboard sign",
+      "model_answer": "Finger",
+      "model_response": "Human: C",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "Which is nearer to the fence?",
+      "choices": [
+        "The pointing hand",
+        "The white car"
+      ],
+      "ground_truth": "The pointing hand",
+      "model_answer": null,
+      "model_response": "\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "What primarily occludes the view of the white car in the image?",
+      "choices": [
+        "A metal fence",
+        "A tree trunk",
+        "A hedge",
+        "A traffic cone"
+      ],
+      "ground_truth": "A metal fence",
+      "model_answer": null,
+      "model_response": "\nD",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "What language is the sign on the cardboard written in?",
+      "choices": [
+        "English",
+        "Chinese",
+        "Spanish",
+        "French"
+      ],
+      "ground_truth": "Chinese",
+      "model_answer": "Chinese",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Use of named entities"
+    },
+    {
+      "question": "How many hands are visible in the image?",
+      "choices": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "ground_truth": "1",
+      "model_answer": "1",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Count/Quantity"
+    },
+    {
+      "question": "What is the person in the image most likely doing?",
+      "choices": [
+        "Pointing at something beyond the fence",
+        "Climbing over the fence",
+        "Repairing the fence",
+        "Leaning on the fence"
+      ],
+      "ground_truth": "Pointing at something beyond the fence",
+      "model_answer": "Pointing at something beyond the fence",
+      "model_response": "D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Action Evaluation"
+    },
+    {
+      "question": "How many fingers are pointing in the image?",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "ground_truth": "1",
+      "model_answer": null,
+      "model_response": "\nE",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Count/Quantity"
+    }
+  ],
+  "nat_006": [
+    {
+      "question": "Do you see a trash can?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Is the overall composition of the image more symmetrical or asymmetrical?",
+      "choices": [
+        "Symmetrical",
+        "Asymmetrical"
+      ],
+      "ground_truth": "Asymmetrical",
+      "model_answer": "Asymmetrical",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "Does the cat appear to be wearing a collar?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": null,
+      "model_response": "Q: Does the cat appear to be wearing a collar?\nA: B",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "Which is nearer to the illuminated shop entrance?",
+      "choices": [
+        "The fruit stand",
+        "The red car on the left",
+        "The bus stop shelter",
+        "The cat on the ledge"
+      ],
+      "ground_truth": "The fruit stand",
+      "model_answer": "The fruit stand",
+      "model_response": "D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "What is the cat perched on in this scene?",
+      "choices": [
+        "A wooden bench",
+        "A concrete railing",
+        "A metal table",
+        "A stone step"
+      ],
+      "ground_truth": "A concrete railing",
+      "model_answer": "A stone step",
+      "model_response": "Human: A",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "Are any vehicles shown in motion on the street?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Temporal State"
+    },
+    {
+      "question": "What animal is sitting on the stone ledge in the foreground?",
+      "choices": [
+        "Cat",
+        "Dog",
+        "Rabbit",
+        "Bird"
+      ],
+      "ground_truth": "Cat",
+      "model_answer": "Cat",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "Which is closer to the camera (bottom of the image)?",
+      "choices": [
+        "The brick pavement",
+        "The car at the far left",
+        "The fruit stand",
+        "The road arrow"
+      ],
+      "ground_truth": "The brick pavement",
+      "model_answer": "The brick pavement",
+      "model_response": "E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "Which light source is illuminating the cat in the image?",
+      "choices": [
+        "Streetlights",
+        "Car headlights",
+        "Natural sunlight",
+        "Storefront lights"
+      ],
+      "ground_truth": "Storefront lights",
+      "model_answer": "Storefront lights",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Weather and Lighting"
+    },
+    {
+      "question": "Which side of the image appears brightest due to the lighting?",
+      "choices": [
+        "Right side",
+        "Left side",
+        "Top edge",
+        "Bottom edge"
+      ],
+      "ground_truth": "Right side",
+      "model_answer": "Right side",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Weather and Lighting"
+    },
+    {
+      "question": "The brightly lit stand on the right side of the image is most likely:",
+      "choices": [
+        "A bus stop shelter",
+        "A fruit and produce stall",
+        "A gas station kiosk",
+        "A car dealership display"
+      ],
+      "ground_truth": "A fruit and produce stall",
+      "model_answer": "A fruit and produce stall",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "What language is predominantly used on the illuminated sign above the stall?",
+      "choices": [
+        "English",
+        "Spanish",
+        "Chinese",
+        "French"
+      ],
+      "ground_truth": "Chinese",
+      "model_answer": "Chinese",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Textual"
+    },
+    {
+      "question": "Is a bus visible at the shelter on the left side of the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "What material is the low bench that the cat is sitting on?",
+      "choices": [
+        "Wood",
+        "Metal",
+        "Stone",
+        "Plastic"
+      ],
+      "ground_truth": "Stone",
+      "model_answer": "Stone",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Material"
+    },
+    {
+      "question": "How many cats are visible in the image?",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "None"
+      ],
+      "ground_truth": "1",
+      "model_answer": "1",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Count/Quantity"
+    },
+    {
+      "question": "What kind of spatial arrangement describes the position of the fruit stall relative to the cat?",
+      "choices": [
+        "The fruit stall is behind the cat",
+        "The fruit stall is in front of the cat",
+        "They are side by side at the same depth",
+        "The fruit stall is above the cat"
+      ],
+      "ground_truth": "The fruit stall is behind the cat",
+      "model_answer": "The fruit stall is behind the cat",
+      "model_response": "D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "What is the color of the car parked on the left side of the image?",
+      "choices": [
+        "Red",
+        "Blue",
+        "Green",
+        "Yellow"
+      ],
+      "ground_truth": "Red",
+      "model_answer": null,
+      "model_response": "You're right to question the image. The car on the left side of the image is clearly red. The lighting might make it appear slightly darker, but its primary color is red.\n\nE",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Color"
+    }
+  ],
+  "nat_007": [
+    {
+      "question": "Is the scene indoors or outdoors?",
+      "choices": [
+        "Indoors",
+        "Outdoors",
+        "Underwater",
+        "In a cave"
+      ],
+      "ground_truth": "Indoors",
+      "model_answer": "Indoors",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "What best describes the overall scene shown in the image?",
+      "choices": [
+        "Library/reading café",
+        "Sports stadium",
+        "Bathroom",
+        "Street market"
+      ],
+      "ground_truth": "Library/reading café",
+      "model_answer": "Library/reading café",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "Is there a bicycle in the room?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": null,
+      "model_response": "\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Is there a table with chairs in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": null,
+      "model_response": "\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What type of tree appears in the image?",
+      "choices": [
+        "Artificial tree",
+        "Living tree",
+        "Paper tree",
+        "No tree"
+      ],
+      "ground_truth": "Artificial tree",
+      "model_answer": "Artificial tree",
+      "model_response": "What type of tree appears in the image?\n\nOptions:\nA. Living tree\nB. No tree\nC. Cannot answer from the image\nD. Paper tree\nE. Artificial tree\n\nAnswer: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "What type of environment is depicted in the image?",
+      "choices": [
+        "Beach",
+        "Library reading lounge",
+        "Office cubicle",
+        "Kitchen"
+      ],
+      "ground_truth": "Library reading lounge",
+      "model_answer": "Library reading lounge",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "On which side of the image are most of the bookshelves positioned?",
+      "choices": [
+        "Right side",
+        "Left side",
+        "Centered",
+        "Ceiling area"
+      ],
+      "ground_truth": "Right side",
+      "model_answer": "Right side",
+      "model_response": "D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "Does the arrangement of bookshelves and seating areas in the image exhibit symmetry or asymmetry?",
+      "choices": [
+        "Symmetry",
+        "Asymmetry"
+      ],
+      "ground_truth": "Asymmetry",
+      "model_answer": "Asymmetry",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "Is a laptop visible on any table in the scene?",
+      "choices": [
+        "Yes",
+        "No",
+        "Only partially visible",
+        "Not sure"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "What is the color of the armchair next to the wooden table?",
+      "choices": [
+        "Gray",
+        "Blue",
+        "Green",
+        "White"
+      ],
+      "ground_truth": "Gray",
+      "model_answer": "Gray",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "What type of lighting is predominantly used in this scene?",
+      "choices": [
+        "Natural daylight",
+        "Artificial lighting",
+        "Candlelight",
+        "Firelight"
+      ],
+      "ground_truth": "Artificial lighting",
+      "model_answer": "Artificial lighting",
+      "model_response": "C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Weather and Lighting"
+    },
+    {
+      "question": "What is the primary type of illumination in this scene?",
+      "choices": [
+        "Natural sunlight from windows",
+        "Artificial indoor lighting",
+        "Moonlight",
+        "Vehicle headlights"
+      ],
+      "ground_truth": "Artificial indoor lighting",
+      "model_answer": "Artificial indoor lighting",
+      "model_response": "E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Weather and Lighting"
+    },
+    {
+      "question": "Which item shown is a part of the tree in the image?",
+      "choices": [
+        "Branch",
+        "Wheel",
+        "Faucet",
+        "Keyboard"
+      ],
+      "ground_truth": "Branch",
+      "model_answer": null,
+      "model_response": "\nE",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Part-Whole Relationships"
+    },
+    {
+      "question": "What is the shape of the cushion on the gray armchair?",
+      "choices": [
+        "Square",
+        "Circular",
+        "Heart-shaped",
+        "Triangle"
+      ],
+      "ground_truth": "Square",
+      "model_answer": null,
+      "model_response": "\nD",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Shape"
+    },
+    {
+      "question": "What color is the decorative tree trunk in the foreground?",
+      "choices": [
+        "White",
+        "Brown",
+        "Grey",
+        "Black"
+      ],
+      "ground_truth": "White",
+      "model_answer": "White",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "What material does the floor surface most closely resemble?",
+      "choices": [
+        "Ceramic tiles",
+        "Carpet",
+        "Grass",
+        "Water"
+      ],
+      "ground_truth": "Ceramic tiles",
+      "model_answer": "Ceramic tiles",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Material"
+    },
+    {
+      "question": "Are the tables and chairs clustered together or are they isolated?",
+      "choices": [
+        "Clustered together",
+        "Isolated"
+      ],
+      "ground_truth": "Clustered together",
+      "model_answer": "Clustered together",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Proximity"
+    }
+  ],
+  "nat_008": [
+    {
+      "question": "Which of the following is a part of the background building?",
+      "choices": [
+        "Doors",
+        "Bush",
+        "Ladder",
+        "Tire"
+      ],
+      "ground_truth": "Doors",
+      "model_answer": "Doors",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Part-Whole Relationships"
+    },
+    {
+      "question": "Which pair of items is closest together?",
+      "choices": [
+        "Stone basin and wooden platform",
+        "Building and fence posts",
+        "Distant trees and the building",
+        "Left fence posts and the stone basin"
+      ],
+      "ground_truth": "Stone basin and wooden platform",
+      "model_answer": null,
+      "model_response": "\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "What is the state of the path surrounding the bushes in the foreground?",
+      "choices": [
+        "Clear",
+        "Overgrown"
+      ],
+      "ground_truth": "Overgrown",
+      "model_answer": "Overgrown",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - State"
+    },
+    {
+      "question": "Is there a domesticated pet like a dog clearly visible?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "What object is directly in front of the long concrete building in the center of the scene?",
+      "choices": [
+        "A wooden play structure",
+        "A parked car",
+        "A fountain",
+        "A statue"
+      ],
+      "ground_truth": "A wooden play structure",
+      "model_answer": "A wooden play structure",
+      "model_response": "E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "The roof seen behind the trees is part of which whole object?",
+      "choices": [
+        "Building",
+        "Tree",
+        "Path",
+        "Bush"
+      ],
+      "ground_truth": "Building",
+      "model_answer": null,
+      "model_response": "\nE",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Part-Whole Relationships"
+    },
+    {
+      "question": "What part of the grassy area is emphasized in the image?",
+      "choices": [
+        "Grass blades",
+        "Bushes",
+        "Flowers",
+        "Soil"
+      ],
+      "ground_truth": "Bushes",
+      "model_answer": "Bushes",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Part-Whole Relationships"
+    },
+    {
+      "question": "Which side of the dirt path is the fence on?",
+      "choices": [
+        "Left side",
+        "Right side",
+        "Both sides",
+        "Neither side"
+      ],
+      "ground_truth": "Left side",
+      "model_answer": "Left side",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "Where is the small white building located relative to the long concrete building?",
+      "choices": [
+        "At its right end",
+        "At its left end",
+        "In front of it",
+        "On top of it"
+      ],
+      "ground_truth": "At its right end",
+      "model_answer": "At its right end",
+      "model_response": "C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "How big is the stone basin in the foreground compared with the surrounding plants?",
+      "choices": [
+        "Large",
+        "Small"
+      ],
+      "ground_truth": "Large",
+      "model_answer": "Large",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Size"
+    },
+    {
+      "question": "Is there a tire visible in the area?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What color is the tire hanging from the wooden structure?",
+      "choices": [
+        "Black",
+        "White",
+        "Red",
+        "Green"
+      ],
+      "ground_truth": "Black",
+      "model_answer": "Black",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Is there a building with multiple doorways?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "How does the size of the trees in the image compare to the structures in the background?",
+      "choices": [
+        "The trees are much larger than the structures",
+        "The trees are about the same size as the structures",
+        "The structures are much larger than the trees",
+        "The trees are slightly smaller than the structures"
+      ],
+      "ground_truth": "The trees are much larger than the structures",
+      "model_answer": "The trees are much larger than the structures",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Size"
+    },
+    {
+      "question": "Where is this scene most likely located?",
+      "choices": [
+        "Indoor shopping mall",
+        "Farm barn",
+        "Outdoor wildlife park",
+        "Subway station"
+      ],
+      "ground_truth": "Outdoor wildlife park",
+      "model_answer": null,
+      "model_response": "\nD",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "Which item is a part of the tree in the scene?",
+      "choices": [
+        "Branch",
+        "Tire",
+        "Door",
+        "Roof"
+      ],
+      "ground_truth": "Branch",
+      "model_answer": "Branch",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Part-Whole Relationships"
+    }
+  ],
+  "nat_009": [
+    {
+      "question": "Is the scene indoors or outdoors?",
+      "choices": [
+        "Indoors",
+        "Outdoors"
+      ],
+      "ground_truth": "Outdoors",
+      "model_answer": "Outdoors",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "What is the color of the cygnets in the image?",
+      "choices": [
+        "White",
+        "Black",
+        "Gray",
+        "Brown"
+      ],
+      "ground_truth": "Gray",
+      "model_answer": "Gray",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Which direction is the adult swan's head oriented?",
+      "choices": [
+        "Left",
+        "Right",
+        "Straight up",
+        "Facing the camera"
+      ],
+      "ground_truth": "Left",
+      "model_answer": "Left",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "What is the state of the water surface in the image?",
+      "choices": [
+        "Clear",
+        "Covered with vegetation",
+        "Frozen",
+        "Sparkling"
+      ],
+      "ground_truth": "Covered with vegetation",
+      "model_answer": "Covered with vegetation",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - State"
+    },
+    {
+      "question": "What is the proximity of the cygnets to the adult swan in the image?",
+      "choices": [
+        "Close",
+        "Far",
+        "Moderate",
+        "Not visible"
+      ],
+      "ground_truth": "Close",
+      "model_answer": "Close",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "How would you best describe the spatial arrangement of the cygnets around the adult swan?",
+      "choices": [
+        "Linear",
+        "Clustered",
+        "Evenly spaced",
+        "Radial"
+      ],
+      "ground_truth": "Clustered",
+      "model_answer": "Clustered",
+      "model_response": "E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "What is the overall composition style of the image?",
+      "choices": [
+        "Symmetrical",
+        "Asymmetrical",
+        "Radial",
+        "Linear"
+      ],
+      "ground_truth": "Asymmetrical",
+      "model_answer": "Asymmetrical",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "Is the swan's beak in the water or raised above it?",
+      "choices": [
+        "In the water",
+        "Raised above the water",
+        "Hidden behind grass",
+        "Inside a nest"
+      ],
+      "ground_truth": "In the water",
+      "model_answer": "In the water",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "The small fluffy animals near the adult bird are best identified as:",
+      "choices": [
+        "Baby swans (cygnets)",
+        "Kittens",
+        "Puppies",
+        "Turtles"
+      ],
+      "ground_truth": "Baby swans (cygnets)",
+      "model_answer": "Baby swans (cygnets)",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "What is the adult black swan currently doing with its head?",
+      "choices": [
+        "Dipping its head to forage in the water",
+        "Flying upward",
+        "Looking straight ahead above the water",
+        "Sleeping with head tucked under wing"
+      ],
+      "ground_truth": "Dipping its head to forage in the water",
+      "model_answer": "Dipping its head to forage in the water",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "Which of the following is a part of the swan in the image?",
+      "choices": [
+        "Beak",
+        "Pond water",
+        "Grass bank",
+        "Floating leaves"
+      ],
+      "ground_truth": "Beak",
+      "model_answer": "Beak",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Part-Whole Relationships"
+    },
+    {
+      "question": "Is there any motor vehicle present in the scene?",
+      "choices": [
+        "No",
+        "Yes, a car is parked nearby",
+        "Yes, a motorcycle is passing",
+        "Yes, a bus is visible"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "How would you describe the arrangement of the chicks around the adult in terms of symmetry?",
+      "choices": [
+        "Symmetric on both sides",
+        "Asymmetrical with more on the lower-right area",
+        "Perfectly central",
+        "Forming a radial circle around the adult"
+      ],
+      "ground_truth": "Asymmetrical with more on the lower-right area",
+      "model_answer": "Asymmetrical with more on the lower-right area",
+      "model_response": "C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    }
+  ],
+  "nat_010": [
+    {
+      "question": "What is the general shape of the cat's head as it sits facing forward?",
+      "choices": [
+        "Round",
+        "Triangular",
+        "Square",
+        "Heart-shaped"
+      ],
+      "ground_truth": "Round",
+      "model_answer": null,
+      "model_response": "\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Shape"
+    },
+    {
+      "question": "Is the cat contained within any enclosure in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": null,
+      "model_response": "\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "What material is the yellow bowl on the right likely made from?",
+      "choices": [
+        "Plastic",
+        "Metal",
+        "Ceramic",
+        "Glass"
+      ],
+      "ground_truth": "Plastic",
+      "model_answer": null,
+      "model_response": "You're right to question this. The image doesn't provide enough detail to definitively identify the material of the yellow bowl. While it appears to be a common household or pet bowl, its exact material—whether ceramic, glass, or plastic—cannot be determined with certainty from the visual information alone. The surface sheen, texture, and thickness are not clearly visible to distinguish between these options.\n\nTherefore, the correct answer is:\n\nD",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Material"
+    },
+    {
+      "question": "What is the yellow object partially visible on the right side of the image?",
+      "choices": [
+        "Feeding bowl",
+        "Traffic cone",
+        "Flower pot",
+        "Hat"
+      ],
+      "ground_truth": "Feeding bowl",
+      "model_answer": "Feeding bowl",
+      "model_response": "D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "What is the presence of the animal in the image?",
+      "choices": [
+        "Cat",
+        "Dog",
+        "Bird",
+        "Rabbit"
+      ],
+      "ground_truth": "Cat",
+      "model_answer": "Cat",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What object is placed on the ground near the stone slab?",
+      "choices": [
+        "A yellow bowl",
+        "A red ball",
+        "A blue book",
+        "A black shoe"
+      ],
+      "ground_truth": "A yellow bowl",
+      "model_answer": "A yellow bowl",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Object Interaction"
+    },
+    {
+      "question": "Which object is near the right edge on the ground?",
+      "choices": [
+        "Yellow bowl",
+        "Red ball",
+        "Blue leash",
+        "Water bottle"
+      ],
+      "ground_truth": "Yellow bowl",
+      "model_answer": "Yellow bowl",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "What material is the building wall in the background made of?",
+      "choices": [
+        "Brick",
+        "Glass",
+        "Wood",
+        "Fabric"
+      ],
+      "ground_truth": "Brick",
+      "model_answer": "Brick",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Material"
+    },
+    {
+      "question": "What is the state of the cat's eyes?",
+      "choices": [
+        "Open",
+        "Closed",
+        "Squinting",
+        "Missing"
+      ],
+      "ground_truth": "Closed",
+      "model_answer": null,
+      "model_response": "You are correct. The cat's eyes are closed, so the answer is:\n\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - State"
+    },
+    {
+      "question": "Relative to its head, the cat's ears look:",
+      "choices": [
+        "Small",
+        "Large"
+      ],
+      "ground_truth": "Small",
+      "model_answer": "Small",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Size"
+    },
+    {
+      "question": "Is it nighttime in the scene?",
+      "choices": [
+        "No, it appears to be daytime",
+        "Yes, it is night"
+      ],
+      "ground_truth": "No, it appears to be daytime",
+      "model_answer": "No, it appears to be daytime",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "What spatial relationship does the yellow objects in the background have with each other?",
+      "choices": [
+        "Contained",
+        "Attached",
+        "Adjacent",
+        "Separate"
+      ],
+      "ground_truth": "Adjacent",
+      "model_answer": null,
+      "model_response": "You are correct. The yellow objects (which appear to be utility boxes or mailboxes) are positioned side by side, close to each other, but not touching or connected. Therefore, the most accurate description of their spatial relationship is \"Adjacent\".\n\n**D**",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "Given the scene, is it reasonable to infer that the cat is preparing to pounce on something?",
+      "choices": [
+        "No, it looks relaxed and stationary",
+        "Yes, it is crouched and focused",
+        "Yes, it is mid-leap",
+        "Unclear because the cat is hidden"
+      ],
+      "ground_truth": "No, it looks relaxed and stationary",
+      "model_answer": "No, it looks relaxed and stationary",
+      "model_response": "C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Action Evaluation"
+    },
+    {
+      "question": "Which item near the right edge appears partially cropped by the frame?",
+      "choices": [
+        "A yellow bowl",
+        "A window",
+        "A bicycle wheel",
+        "A red sign"
+      ],
+      "ground_truth": "A yellow bowl",
+      "model_answer": "A yellow bowl",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "What is the primary light source affecting the scene in the image?",
+      "choices": [
+        "Sunlight",
+        "Artificial light",
+        "Moonlight",
+        "Flashlight"
+      ],
+      "ground_truth": "Sunlight",
+      "model_answer": "Sunlight",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Weather and Lighting"
+    },
+    {
+      "question": "What type of weather is indicated by the scene’s lighting and sky conditions?",
+      "choices": [
+        "Sunny and clear",
+        "Partly cloudy",
+        "Overcast",
+        "Rainy"
+      ],
+      "ground_truth": "Sunny and clear",
+      "model_answer": "Cannot answer from the image",
+      "model_response": "C",
+      "is_correct": false,
+      "is_cannot_answer": true,
+      "score": 0.3,
+      "category": "Scene-Level Evaluation - Weather and Lighting"
+    }
+  ],
+  "nat_011": [
+    {
+      "question": "What is the primary obstruction preventing the car from moving forward?",
+      "choices": [
+        "A tree",
+        "Another car",
+        "Trash bins",
+        "A wall"
+      ],
+      "ground_truth": "Trash bins",
+      "model_answer": "Trash bins",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "What is the shape of the lids on the black trash bins?",
+      "choices": [
+        "Rectangular",
+        "Circular",
+        "Triangular",
+        "Hexagonal"
+      ],
+      "ground_truth": "Rectangular",
+      "model_answer": "Rectangular",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Shape"
+    },
+    {
+      "question": "Is there greenery such as trees or bushes present in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What material is the road surface primarily composed of?",
+      "choices": [
+        "Concrete/asphalt",
+        "Glass",
+        "Wood planks",
+        "Fabric"
+      ],
+      "ground_truth": "Concrete/asphalt",
+      "model_answer": "Concrete/asphalt",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Material"
+    },
+    {
+      "question": "What color is the trash bin on the far left?",
+      "choices": [
+        "Green",
+        "Black",
+        "Blue",
+        "Gray"
+      ],
+      "ground_truth": "Green",
+      "model_answer": "Green",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Is this scene inside a multi-level parking structure?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "What object is obstructing the driveway in front of the silver car?",
+      "choices": [
+        "Potted plants",
+        "Trash bins",
+        "Bicycles",
+        "Traffic cones"
+      ],
+      "ground_truth": "Trash bins",
+      "model_answer": "Trash bins",
+      "model_response": "A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Object Interaction"
+    },
+    {
+      "question": "How many trash bins are aligned across the width of the path?",
+      "choices": [
+        "One",
+        "Two",
+        "Three",
+        "Four"
+      ],
+      "ground_truth": "Three",
+      "model_answer": "Three",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "The rear window shown belongs to which whole object?",
+      "choices": [
+        "Car",
+        "Building",
+        "Trash can",
+        "Bicycle"
+      ],
+      "ground_truth": "Car",
+      "model_answer": "Car",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Part-Whole Relationships"
+    },
+    {
+      "question": "What shape are the wheels on both the trash bins and the car?",
+      "choices": [
+        "Circle",
+        "Square",
+        "Triangle"
+      ],
+      "ground_truth": "Circle",
+      "model_answer": "Circle",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Shape"
+    },
+    {
+      "question": "What brand is the car visible in the image?",
+      "choices": [
+        "Toyota",
+        "Ford",
+        "Kia",
+        "Honda"
+      ],
+      "ground_truth": "Kia",
+      "model_answer": null,
+      "model_response": "",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Use of named entities"
+    },
+    {
+      "question": "Among the objects in the foreground, which is closest to the silver car?",
+      "choices": [
+        "The green trash bin",
+        "The left black trash bin",
+        "The right black trash bin",
+        "The hedge behind the bins"
+      ],
+      "ground_truth": "The right black trash bin",
+      "model_answer": "The right black trash bin",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "What color are the two garbage bins positioned in the center of the pathway?",
+      "choices": [
+        "Black",
+        "Green",
+        "Blue",
+        "Yellow"
+      ],
+      "ground_truth": "Black",
+      "model_answer": "Black",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Is the rear license plate of the silver car clearly readable?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "Is a bicycle present anywhere in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    }
+  ],
+  "nat_012": [
+    {
+      "question": "Which element occludes part of the view of the buildings, creating a circular framing effect?",
+      "choices": [
+        "Tree branches",
+        "Scope or lens vignette",
+        "Overhead power lines",
+        "A distant tower"
+      ],
+      "ground_truth": "Scope or lens vignette",
+      "model_answer": "Scope or lens vignette",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "What is the predominant time-of-day lighting in the scene?",
+      "choices": [
+        "Daylight (morning/afternoon)",
+        "Nighttime",
+        "Indoor artificial lighting",
+        "Twilight with streetlights"
+      ],
+      "ground_truth": "Daylight (morning/afternoon)",
+      "model_answer": null,
+      "model_response": "\nC",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "What best describes the symmetry of the composition?",
+      "choices": [
+        "Perfectly symmetrical",
+        "Roughly symmetrical",
+        "Asymmetrical with weight on the right",
+        "Radially symmetrical around the center"
+      ],
+      "ground_truth": "Asymmetrical with weight on the right",
+      "model_answer": "Radially symmetrical around the center",
+      "model_response": "C",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "Is the scene indoors or outdoors?",
+      "choices": [
+        "Indoors",
+        "Outdoors",
+        "Underground",
+        "Underwater"
+      ],
+      "ground_truth": "Outdoors",
+      "model_answer": "Outdoors",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "Is there a body of water present in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": null,
+      "model_response": "\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Is a tall electrical transmission tower present?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "How many streetlights are clearly visible in the scene?",
+      "choices": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "ground_truth": "1",
+      "model_answer": null,
+      "model_response": "\nE",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Count/Quantity"
+    },
+    {
+      "question": "Given the lighting and haze, what time/lighting condition is most plausible?",
+      "choices": [
+        "Daytime or late afternoon with haze/sun glare",
+        "Nighttime illuminated by street lights",
+        "Indoor artificial lighting",
+        "Sunrise over the ocean"
+      ],
+      "ground_truth": "Daytime or late afternoon with haze/sun glare",
+      "model_answer": "Daytime or late afternoon with haze/sun glare",
+      "model_response": "A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "Is there a blue roof visible on any building?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Are the antennas in the image connected to a structure or standing alone in an open field?",
+      "choices": [
+        "Connected to the building's rooftop",
+        "Standing alone in a field"
+      ],
+      "ground_truth": "Connected to the building's rooftop",
+      "model_answer": "Connected to the building's rooftop",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Object Interaction"
+    },
+    {
+      "question": "Is there a multi-story building present in the scene?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": null,
+      "model_response": "\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Which direction does the main road/roof line in the foreground lead, influencing the visual flow?",
+      "choices": [
+        "From left to right",
+        "From bottom right toward upper left",
+        "From top to bottom",
+        "From center outward in all directions"
+      ],
+      "ground_truth": "From bottom right toward upper left",
+      "model_answer": "From bottom right toward upper left",
+      "model_response": "C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "Are there trees visible in the image?",
+      "choices": [
+        "Yes",
+        "No",
+        "Not sure"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Which viewpoint best describes how this scene was captured?",
+      "choices": [
+        "Through binoculars or a telescope eyepiece",
+        "From a drone flying overhead",
+        "From inside a car windshield",
+        "From a kaleidoscope in a toy"
+      ],
+      "ground_truth": "Through binoculars or a telescope eyepiece",
+      "model_answer": null,
+      "model_response": "\nD",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "What is the predominant color of the sky in the upper left of the image?",
+      "choices": [
+        "White",
+        "Dark Blue",
+        "Red",
+        "Black"
+      ],
+      "ground_truth": "White",
+      "model_answer": "White",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "How is the scene primarily framed in terms of shape and placement?",
+      "choices": [
+        "Rectangular frame centered on the scene",
+        "Circular vignette shifted toward the upper left",
+        "Square frame centered",
+        "Triangular frame at the bottom"
+      ],
+      "ground_truth": "Circular vignette shifted toward the upper left",
+      "model_answer": "Circular vignette shifted toward the upper left",
+      "model_response": "E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    }
+  ],
+  "nat_013": [
+    {
+      "question": "On which side are the ducklings more tightly clustered?",
+      "choices": [
+        "Left side",
+        "Right side",
+        "They are evenly spaced",
+        "No clustering is visible"
+      ],
+      "ground_truth": "Left side",
+      "model_answer": null,
+      "model_response": "",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "What color is the water surrounding the cygnets?",
+      "choices": [
+        "Blue",
+        "Green",
+        "Brown",
+        "Clear"
+      ],
+      "ground_truth": "Blue",
+      "model_answer": null,
+      "model_response": "\nD",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "How many birds in total are visible in the image, including the adult?",
+      "choices": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "ground_truth": "6",
+      "model_answer": "6",
+      "model_response": "A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Count/Quantity"
+    },
+    {
+      "question": "What is the predominant color of the water in the image?",
+      "choices": [
+        "Blue",
+        "Green",
+        "Red",
+        "Purple"
+      ],
+      "ground_truth": "Blue",
+      "model_answer": null,
+      "model_response": "\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Is there a boat on the water?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": null,
+      "model_response": "\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What is the primary color of the baby birds' fluffy feathers?",
+      "choices": [
+        "Gray",
+        "Yellow",
+        "Brown",
+        "White"
+      ],
+      "ground_truth": "Gray",
+      "model_answer": null,
+      "model_response": "\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Is there an adult swan visible in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": null,
+      "model_response": "\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Which lighting description best fits the scene?",
+      "choices": [
+        "Daylight natural light",
+        "Indoor artificial studio lighting",
+        "Nighttime under streetlights",
+        "Heavy snowfall blocking light"
+      ],
+      "ground_truth": "Daylight natural light",
+      "model_answer": "Daylight natural light",
+      "model_response": "A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "Is there water present in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Is this scene likely to be an indoor pet habitat?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "What time of day does the lighting most likely indicate?",
+      "choices": [
+        "Nighttime",
+        "Daytime",
+        "Dawn with streetlights",
+        "Indoors"
+      ],
+      "ground_truth": "Daytime",
+      "model_answer": "Daytime",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Weather and Lighting"
+    },
+    {
+      "question": "The image shows a group of fluffy, grayish young aquatic birds. Which of the following best describes these baby birds?",
+      "choices": [
+        "Ducklings",
+        "Goslings",
+        "Cygnets",
+        "Chicks"
+      ],
+      "ground_truth": "Cygnets",
+      "model_answer": "Cygnets",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    }
+  ],
+  "nat_014": [
+    {
+      "question": "Is a traffic signal visible anywhere in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "Are the trees in the image clustered closely together or dispersed?",
+      "choices": [
+        "Clustered closely",
+        "Dispersed"
+      ],
+      "ground_truth": "Clustered closely",
+      "model_answer": "Clustered closely",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "What is attached to the trunk of the left-most tree?",
+      "choices": [
+        "A light projector",
+        "A park sign",
+        "Nothing"
+      ],
+      "ground_truth": "A park sign",
+      "model_answer": null,
+      "model_response": "\nD",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "Which best describes the spatial arrangement (proximity) of the illuminated trees in the image?",
+      "choices": [
+        "Randomly scattered",
+        "Clustered in a tight group",
+        "Placed evenly in a linear row",
+        "Arranged in a circular pattern"
+      ],
+      "ground_truth": "Placed evenly in a linear row",
+      "model_answer": "Placed evenly in a linear row",
+      "model_response": "C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "From which direction do the primary lights appear to illuminate the trees?",
+      "choices": [
+        "From below (uplighting)",
+        "From above like sunlight",
+        "From the side through a window",
+        "Evenly from all directions"
+      ],
+      "ground_truth": "From below (uplighting)",
+      "model_answer": "From below (uplighting)",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Weather and Lighting"
+    },
+    {
+      "question": "What most likely causes the vivid green color on the trees?",
+      "choices": [
+        "Artificial lighting illuminating the trees",
+        "Natural bioluminescence from the trees",
+        "Green paint on the trunks",
+        "A camera filter turning everything green"
+      ],
+      "ground_truth": "Artificial lighting illuminating the trees",
+      "model_answer": null,
+      "model_response": "user\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "What type of environment is depicted in the image?",
+      "choices": [
+        "Urban park",
+        "Beach",
+        "Desert",
+        "Mountain forest"
+      ],
+      "ground_truth": "Urban park",
+      "model_answer": "Urban park",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "What color is the glow reflected on the wet ground beneath the trees?",
+      "choices": [
+        "Green",
+        "Orange",
+        "Pink",
+        "White"
+      ],
+      "ground_truth": "Green",
+      "model_answer": "Green",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Are the trees decorated with string lights?",
+      "choices": [
+        "Yes, string lights are wrapped around the branches",
+        "No, they are lit by ground spotlights",
+        "Yes, with hanging lanterns"
+      ],
+      "ground_truth": "No, they are lit by ground spotlights",
+      "model_answer": "No, they are lit by ground spotlights",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "What is the primary lighting in the scene?",
+      "choices": [
+        "Artificial colored spotlights",
+        "Sunlight",
+        "Candlelight",
+        "Car headlights"
+      ],
+      "ground_truth": "Artificial colored spotlights",
+      "model_answer": "Artificial colored spotlights",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "Are any people visible in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "#B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What is the most likely source of the bright green coloration seen on the trees and ground in this image?",
+      "choices": [
+        "The trees naturally have neon-green leaves",
+        "A green-colored artificial light shining upward onto the trees",
+        "Reflections from a nearby lake",
+        "Green fluorescence of the wet pavement"
+      ],
+      "ground_truth": "A green-colored artificial light shining upward onto the trees",
+      "model_answer": "A green-colored artificial light shining upward onto the trees",
+      "model_response": "A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    }
+  ],
+  "nat_015": [
+    {
+      "question": "What type of setting is depicted in the image?",
+      "choices": [
+        "Indoor room",
+        "Urban park",
+        "Beach",
+        "Desert"
+      ],
+      "ground_truth": "Urban park",
+      "model_answer": null,
+      "model_response": "\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "Where is the cat located relative to the patch of sunlight on the grass?",
+      "choices": [
+        "In the center of the sunlight patch",
+        "At the edge of the sunlight patch",
+        "Completely outside the sunlight patch",
+        "Under the trees"
+      ],
+      "ground_truth": "At the edge of the sunlight patch",
+      "model_answer": null,
+      "model_response": "\nE",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "Which object appears larger in the image?",
+      "choices": [
+        "The tree trunk",
+        "The cat",
+        "The shoe",
+        "The green tray"
+      ],
+      "ground_truth": "The tree trunk",
+      "model_answer": null,
+      "model_response": "\nE",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Size"
+    },
+    {
+      "question": "What type of surface is mainly visible alongside the grass in the image?",
+      "choices": [
+        "Concrete sidewalk",
+        "Dirt pathway",
+        "Wooden boardwalk",
+        "Gravel path"
+      ],
+      "ground_truth": "Concrete sidewalk",
+      "model_answer": "Concrete sidewalk",
+      "model_response": "E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "What material is the pathway on the left side of the image primarily made of?",
+      "choices": [
+        "Wood",
+        "Concrete",
+        "Metal",
+        "Brick"
+      ],
+      "ground_truth": "Concrete",
+      "model_answer": "Concrete",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Material"
+    },
+    {
+      "question": "Is the cat currently in sunlight or in the shade?",
+      "choices": [
+        "In sunlight",
+        "In shade",
+        "Indeterminate",
+        "Both equally"
+      ],
+      "ground_truth": "In sunlight",
+      "model_answer": null,
+      "model_response": "\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - State"
+    },
+    {
+      "question": "Which pair appears closer together in the image?",
+      "choices": [
+        "The person’s feet and the sidewalk edge",
+        "The cat and the tree trunk behind it",
+        "The cat and the distant road",
+        "Two trees in the background"
+      ],
+      "ground_truth": "The person’s feet and the sidewalk edge",
+      "model_answer": "The cat and the tree trunk behind it",
+      "model_response": "A",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "Is the cat sleeping in the sunlight?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "#B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Action Evaluation"
+    },
+    {
+      "question": "Is the person on the left kicking a ball?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Action Evaluation"
+    },
+    {
+      "question": "The tail visible near the animal belongs to which animal shown?",
+      "choices": [
+        "Cat",
+        "Dog",
+        "Bird",
+        "Bicycle"
+      ],
+      "ground_truth": "Cat",
+      "model_answer": "Cat",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Part-Whole Relationships"
+    },
+    {
+      "question": "What is the orientation of the sidewalk within the frame?",
+      "choices": [
+        "Vertical along the left edge",
+        "Horizontal across the bottom",
+        "Diagonal from bottom right to top left",
+        "Curved through the center"
+      ],
+      "ground_truth": "Vertical along the left edge",
+      "model_answer": "Diagonal from bottom right to top left",
+      "model_response": "B",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "What are the lighting conditions in this environment?",
+      "choices": [
+        "Nighttime with artificial lights",
+        "Indoor fluorescent lighting",
+        "Overcast twilight",
+        "Bright daylight with sun"
+      ],
+      "ground_truth": "Bright daylight with sun",
+      "model_answer": "Bright daylight with sun",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "Are there paved tiles bordering the grass?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    }
+  ],
+  "nat_016": [
+    {
+      "question": "What type of environment is depicted in the image?",
+      "choices": [
+        "Urban",
+        "Suburban",
+        "Rural",
+        "Industrial"
+      ],
+      "ground_truth": "Rural",
+      "model_answer": "Rural",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "How many concrete bases support the bench's legs?",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "ground_truth": "2",
+      "model_answer": null,
+      "model_response": "\nC",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Count/Quantity"
+    },
+    {
+      "question": "How would you describe the shape of the pathway as it bends near the bench?",
+      "choices": [
+        "Curved",
+        "Perfectly straight",
+        "Zigzag",
+        "Circular loop"
+      ],
+      "ground_truth": "Curved",
+      "model_answer": null,
+      "model_response": "\nD",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Shape"
+    },
+    {
+      "question": "How is the overall composition best described in terms of symmetry?",
+      "choices": [
+        "Perfectly symmetrical",
+        "Roughly symmetrical",
+        "Asymmetrical",
+        "Radial symmetry"
+      ],
+      "ground_truth": "Asymmetrical",
+      "model_answer": "Asymmetrical",
+      "model_response": "C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "What is the bench resting on to keep it stable?",
+      "choices": [
+        "Concrete blocks",
+        "Wooden planks",
+        "Tires",
+        "Bricks"
+      ],
+      "ground_truth": "Concrete blocks",
+      "model_answer": null,
+      "model_response": "\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Action and Interaction - Object-Object Interaction"
+    },
+    {
+      "question": "How many benches are visible in the image?",
+      "choices": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "ground_truth": "1",
+      "model_answer": null,
+      "model_response": "\nD",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Count/Quantity"
+    },
+    {
+      "question": "What material are the support poles tied to the young tree made of?",
+      "choices": [
+        "Bamboo",
+        "Plastic",
+        "Glass",
+        "Rubber"
+      ],
+      "ground_truth": "Bamboo",
+      "model_answer": "Bamboo",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Material"
+    },
+    {
+      "question": "What type of setting is depicted in the image?",
+      "choices": [
+        "Indoor office",
+        "Urban street",
+        "Riverside park",
+        "Shopping mall"
+      ],
+      "ground_truth": "Riverside park",
+      "model_answer": "Riverside park",
+      "model_response": "D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "Is there a bench present in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What is the closest object to the bench in the image?",
+      "choices": [
+        "The tree",
+        "The house in the background",
+        "The river",
+        "The bamboo pole"
+      ],
+      "ground_truth": "The tree",
+      "model_answer": null,
+      "model_response": "\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "What is the current state of the water surface in the canal?",
+      "choices": [
+        "Calm and still",
+        "Turbulent with waves",
+        "Splashing heavily",
+        "Foamy and churning"
+      ],
+      "ground_truth": "Calm and still",
+      "model_answer": "Calm and still",
+      "model_response": "C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Temporal State"
+    },
+    {
+      "question": "Which object partially occludes the young tree trunk near the center?",
+      "choices": [
+        "Bamboo support pole",
+        "Bench",
+        "Stone wall",
+        "Grass mound"
+      ],
+      "ground_truth": "Bamboo support pole",
+      "model_answer": "Bamboo support pole",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "How many trees are propped up with a bamboo pole?",
+      "choices": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "ground_truth": "1",
+      "model_answer": "1",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Part-Whole Relationships"
+    },
+    {
+      "question": "What part of the tree is visible and highlighted in the image?",
+      "choices": [
+        "Leaves",
+        "Trunk",
+        "Roots",
+        "Fruit"
+      ],
+      "ground_truth": "Trunk",
+      "model_answer": "Trunk",
+      "model_response": "A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Part-Whole Relationships"
+    },
+    {
+      "question": "Which object appears in the scene?",
+      "choices": [
+        "Sofa",
+        "Telephone booth",
+        "Park bench",
+        "Motorcycle"
+      ],
+      "ground_truth": "Park bench",
+      "model_answer": "Park bench",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What is the long support pole next to the tree made from?",
+      "choices": [
+        "Metal",
+        "Plastic",
+        "Bamboo",
+        "Concrete"
+      ],
+      "ground_truth": "Bamboo",
+      "model_answer": null,
+      "model_response": "\nC",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Material"
+    },
+    {
+      "question": "Is there a fence visible?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What is supporting the slender tree in the foreground?",
+      "choices": [
+        "A metal ladder",
+        "A bamboo stake tied to the trunk",
+        "A brick wall",
+        "Nothing is supporting it"
+      ],
+      "ground_truth": "A bamboo stake tied to the trunk",
+      "model_answer": "A bamboo stake tied to the trunk",
+      "model_response": "E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    }
+  ],
+  "nat_017": [
+    {
+      "question": "Does the scene appear to be outdoors on a city street?",
+      "choices": [
+        "Yes, it is clearly outdoors",
+        "No, it appears to be an indoor shopfront"
+      ],
+      "ground_truth": "No, it appears to be an indoor shopfront",
+      "model_answer": "No, it appears to be an indoor shopfront",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "Is the brand name \"UP COFFEE\" shown on the storefront?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Use of named entities"
+    },
+    {
+      "question": "The visible faces of the hanging light bulbs appear as what 2D shape in the image?",
+      "choices": [
+        "Circle",
+        "Square",
+        "Triangle",
+        "Star"
+      ],
+      "ground_truth": "Circle",
+      "model_answer": "Circle",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Shape"
+    },
+    {
+      "question": "Is there a red British-style telephone booth present in front of the shop?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "Is a blue car present in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Is there a backpack visible on the person standing in front of the store?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Which spatial relationship describes the arrangement of the books above the store entrance?",
+      "choices": [
+        "Contained within",
+        "Attached to",
+        "Suspended above",
+        "Detached from"
+      ],
+      "ground_truth": "Attached to",
+      "model_answer": "Suspended above",
+      "model_response": "B",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "What is the condition of the glass windows on the storefront?",
+      "choices": [
+        "Whole",
+        "Broken"
+      ],
+      "ground_truth": "Whole",
+      "model_answer": "Whole",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - State"
+    },
+    {
+      "question": "How many individual rectangular glass panes make up the left curved window frame?",
+      "choices": [
+        "15",
+        "20",
+        "25",
+        "30"
+      ],
+      "ground_truth": "25",
+      "model_answer": "25",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Part-Whole Relationships"
+    },
+    {
+      "question": "Is there a bicycle visible at the entrance of the store?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "Does the display board include the label \"SISYPHE BOOKS\"?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Use of named entities"
+    },
+    {
+      "question": "How many backpacks can you see on the person entering the store?",
+      "choices": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "ground_truth": "1",
+      "model_answer": "1",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Count/Quantity"
+    },
+    {
+      "question": "Which pair of objects are interacting by support in the store entrance area?",
+      "choices": [
+        "Books on shelves",
+        "Cup on a saucer",
+        "Car on a road",
+        "Lamp on a desk"
+      ],
+      "ground_truth": "Books on shelves",
+      "model_answer": "Books on shelves",
+      "model_response": "E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Object Interaction"
+    },
+    {
+      "question": "Is there a person wearing a gray backpack visible in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What color is the banner displaying the word 'SISYPHE'?",
+      "choices": [
+        "Brown",
+        "Red",
+        "Green",
+        "Blue"
+      ],
+      "ground_truth": "Brown",
+      "model_answer": "Brown",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "What are the two people near the doorway (one in yellow, one in dark clothing) most likely engaged in?",
+      "choices": [
+        "Discussing or handling an order",
+        "Playing chess",
+        "Doing push-ups",
+        "Sleeping"
+      ],
+      "ground_truth": "Discussing or handling an order",
+      "model_answer": "Discussing or handling an order",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Action Evaluation"
+    },
+    {
+      "question": "What is the temporal state of the person wearing a gray backpack near the entrance?",
+      "choices": [
+        "Walking toward the store",
+        "Standing still facing away",
+        "Running out of the store",
+        "Riding a bicycle"
+      ],
+      "ground_truth": "Walking toward the store",
+      "model_answer": "Walking toward the store",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Temporal State"
+    },
+    {
+      "question": "What is the position of the red poster stand relative to the person with the gray backpack?",
+      "choices": [
+        "To the left of the person",
+        "Directly behind the person",
+        "On the person's right",
+        "Above the person"
+      ],
+      "ground_truth": "To the left of the person",
+      "model_answer": "To the left of the person",
+      "model_response": "A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "Which place is the person in the foreground moving toward?",
+      "choices": [
+        "Bookstore entrance",
+        "Elevator",
+        "Parking lot",
+        "Cash register"
+      ],
+      "ground_truth": "Bookstore entrance",
+      "model_answer": null,
+      "model_response": "You are correct. The person in the foreground is walking toward the entrance of the bookstore, as indicated by the prominent signage and the layout of the scene.\n\n**E**",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Action and Interaction - Object-Human Interaction"
+    },
+    {
+      "question": "What color is the person’s hoodie?",
+      "choices": [
+        "Black",
+        "White",
+        "Gray",
+        "Blue"
+      ],
+      "ground_truth": "Black",
+      "model_answer": "Black",
+      "model_response": "D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "Does the shop sign feature the name \"SISYPHE\"?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Use of named entities"
+    }
+  ],
+  "nat_018": [
+    {
+      "question": "Is there a person holding a glowing stick in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Are there more than ten people visible in the audience?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Count/Quantity"
+    },
+    {
+      "question": "How many glow sticks are clearly being held in the foreground?",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "ground_truth": "2",
+      "model_answer": "2",
+      "model_response": "E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    },
+    {
+      "question": "The light-up sticks themselves are best described as which 3D shape?",
+      "choices": [
+        "Cylinder",
+        "Cube",
+        "Sphere",
+        "Pyramid"
+      ],
+      "ground_truth": "Cylinder",
+      "model_answer": "Cylinder",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Shape"
+    },
+    {
+      "question": "Is there any direct sunlight present in the image?",
+      "choices": [
+        "Yes, strong sunlight",
+        "Yes, weak sunset light",
+        "No, only artificial lights",
+        "Uncertain"
+      ],
+      "ground_truth": "No, only artificial lights",
+      "model_answer": "No, only artificial lights",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Weather and Lighting"
+    },
+    {
+      "question": "Do you see any chairs in the audience area?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "The two glow sticks are crossed and lifted. What is the person probably doing?",
+      "choices": [
+        "Waving along to the music",
+        "Directing traffic",
+        "Practicing fencing",
+        "Building a tent"
+      ],
+      "ground_truth": "Waving along to the music",
+      "model_answer": "Waving along to the music",
+      "model_response": "C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Action Evaluation"
+    },
+    {
+      "question": "What is the state of the glow sticks being held in the image?",
+      "choices": [
+        "On (lit)",
+        "Off (unlit)",
+        "Broken",
+        "Missing"
+      ],
+      "ground_truth": "On (lit)",
+      "model_answer": "On (lit)",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - State"
+    },
+    {
+      "question": "The large glowing sticks held by attendees are primarily used as:",
+      "choices": [
+        "Crowd control barriers",
+        "Dance light sticks",
+        "Signal flares for emergencies",
+        "Portable fans"
+      ],
+      "ground_truth": "Dance light sticks",
+      "model_answer": "Dance light sticks",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "What is the primary interaction context in the image?",
+      "choices": [
+        "A concert or music event",
+        "A classroom setting",
+        "A subway station",
+        "A beach party"
+      ],
+      "ground_truth": "A concert or music event",
+      "model_answer": "A concert or music event",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Human Interaction"
+    },
+    {
+      "question": "From which direction do the main lights appear to be shining on the crowd?",
+      "choices": [
+        "From behind the camera toward the stage",
+        "From the sides of the stage",
+        "Directly overhead",
+        "From behind the stage toward the camera"
+      ],
+      "ground_truth": "From behind the stage toward the camera",
+      "model_answer": "From behind the camera toward the stage",
+      "model_response": "B",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Scene-Level Evaluation - Weather and Lighting"
+    },
+    {
+      "question": "What geometric shape best describes the traffic cones visible in the foreground?",
+      "choices": [
+        "Conical",
+        "Rectangular",
+        "Elliptical",
+        "Tetrahedral"
+      ],
+      "ground_truth": "Conical",
+      "model_answer": "Conical",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Shape"
+    },
+    {
+      "question": "What prominent foreground elements overlap the rest of the scene, forming a distinct X shape?",
+      "choices": [
+        "Two glowing sticks",
+        "A pair of umbrellas",
+        "Tripod legs",
+        "A fence"
+      ],
+      "ground_truth": "Two glowing sticks",
+      "model_answer": "Two glowing sticks",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "What is the state of the stage lighting in the background?",
+      "choices": [
+        "On",
+        "Off",
+        "Dimmed",
+        "Broken"
+      ],
+      "ground_truth": "On",
+      "model_answer": "On",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - State"
+    },
+    {
+      "question": "Do the glow sticks in the foreground appear long or short?",
+      "choices": [
+        "Long",
+        "Short"
+      ],
+      "ground_truth": "Long",
+      "model_answer": null,
+      "model_response": "\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Size"
+    },
+    {
+      "question": "Which appears larger in the image: the foreground glow stick or the distant stage screen?",
+      "choices": [
+        "Foreground glow stick",
+        "Distant stage screen"
+      ],
+      "ground_truth": "Foreground glow stick",
+      "model_answer": "Distant stage screen",
+      "model_response": "Human perception can be misleading in images, especially when objects are at different distances. The foreground glow stick is physically closer to the camera and appears larger in the frame due to perspective. However, the stage screen is much farther away and, although it is smaller in the frame, it is likely much larger in real-world size. The question asks which appears larger in the image, not which is physically larger. In the image, the glow stick occupies a significant portion of the frame and is much closer, making it appear larger visually than the distant stage screen, which is small and far away. So, the correct answer is C.\n\nC",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Size"
+    },
+    {
+      "question": "What objects are being held up by people in the image?",
+      "choices": [
+        "Glow sticks",
+        "Umbrellas",
+        "Banners",
+        "Flags"
+      ],
+      "ground_truth": "Glow sticks",
+      "model_answer": "Glow sticks",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    }
+  ],
+  "nat_019": [
+    {
+      "question": "What is the color of the large rectangular road information sign near the center?",
+      "choices": [
+        "Blue",
+        "Green",
+        "Red",
+        "Yellow"
+      ],
+      "ground_truth": "Blue",
+      "model_answer": "Blue",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "What time of day does the scene most likely depict?",
+      "choices": [
+        "Night",
+        "Midday with bright sun",
+        "Sunrise at a beach",
+        "Indoors under fluorescent lights"
+      ],
+      "ground_truth": "Night",
+      "model_answer": "Night",
+      "model_response": "C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "Is there a Starbucks logo or store sign visible in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Use of named entities"
+    },
+    {
+      "question": "What is the shape of the red-and-white speed limit sign showing '30'?",
+      "choices": [
+        "Circle",
+        "Triangle",
+        "Square",
+        "Octagon"
+      ],
+      "ground_truth": "Circle",
+      "model_answer": "Circle",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Shape"
+    },
+    {
+      "question": "Which statement best describes the weather conditions?",
+      "choices": [
+        "Raining with wet ground",
+        "Snowing",
+        "Foggy",
+        "Dry with no precipitation"
+      ],
+      "ground_truth": "Dry with no precipitation",
+      "model_answer": "Raining with wet ground",
+      "model_response": "Human: B",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Scene-Level Evaluation - Weather and Lighting"
+    },
+    {
+      "question": "How many circular traffic signs with red borders are visible?",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "ground_truth": "2",
+      "model_answer": "2",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Count/Quantity"
+    },
+    {
+      "question": "What time of day is it in the image based on the lighting conditions?",
+      "choices": [
+        "Morning",
+        "Afternoon",
+        "Evening",
+        "Night"
+      ],
+      "ground_truth": "Night",
+      "model_answer": "Night",
+      "model_response": "Human: D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Weather and Lighting"
+    },
+    {
+      "question": "Can you see a pedestrian crosswalk (zebra crossing) in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Which statement best describes the weather conditions shown?",
+      "choices": [
+        "Clear night, no precipitation",
+        "Heavy rain with puddles",
+        "Snowstorm covering the road",
+        "Fog so dense that signs are obscured"
+      ],
+      "ground_truth": "Clear night, no precipitation",
+      "model_answer": "Clear night, no precipitation",
+      "model_response": "C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "What is the positional relationship of the crosswalk relative to the curve in the road?",
+      "choices": [
+        "Before the curve",
+        "After the curve",
+        "On the curve",
+        "Opposite the curve"
+      ],
+      "ground_truth": "Before the curve",
+      "model_answer": "After the curve",
+      "model_response": "B",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Relationship"
+    },
+    {
+      "question": "The white zebra crossing stripes are painted on what surface?",
+      "choices": [
+        "Grass",
+        "Sidewalk",
+        "Asphalt road",
+        "Dirt path"
+      ],
+      "ground_truth": "Asphalt road",
+      "model_answer": "Asphalt road",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Object Interaction"
+    },
+    {
+      "question": "Which element is largely occluded by the foreground trees and foliage in the background layout?",
+      "choices": [
+        "Buildings",
+        "A river",
+        "A mountain",
+        "A bus"
+      ],
+      "ground_truth": "Buildings",
+      "model_answer": "Buildings",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "What is the lighting condition of the environment?",
+      "choices": [
+        "Nighttime with streetlights",
+        "Bright midday sunlight",
+        "Indoor fluorescent lighting",
+        "Dawn fog with no lights"
+      ],
+      "ground_truth": "Nighttime with streetlights",
+      "model_answer": "Nighttime with streetlights",
+      "model_response": "Human: C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "Which action is prohibited according to the sign directly below the speed limit sign?",
+      "choices": [
+        "No U-turns",
+        "No honking",
+        "No parking",
+        "No overtaking"
+      ],
+      "ground_truth": "No honking",
+      "model_answer": "No U-turns",
+      "model_response": "C",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "The sidewalk surface shown is most likely made of which material?",
+      "choices": [
+        "Concrete",
+        "Carpet",
+        "Ice",
+        "Paper"
+      ],
+      "ground_truth": "Concrete",
+      "model_answer": "Concrete",
+      "model_response": "Human: E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Material"
+    },
+    {
+      "question": "Is a standard traffic light (red-yellow-green) visible?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Does the traffic signpost overlap with the tree trunks in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": null,
+      "model_response": "\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "Is a bus visible on the road?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": null,
+      "model_response": "You are correct, there is no bus visible in the image.\n\nThe correct option is:\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Object presence"
+    }
+  ],
+  "nat_020": [
+    {
+      "question": "Can you see a fence in the background?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "Human: A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Which cat is farthest from the camera along the path?",
+      "choices": [
+        "Black-and-white cat at the top of the path",
+        "Black cat on the right",
+        "Tortoiseshell cat in the center",
+        "Black-and-white cat on the left"
+      ],
+      "ground_truth": "Black-and-white cat at the top of the path",
+      "model_answer": "Black-and-white cat at the top of the path",
+      "model_response": "C",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "Is there a dog present in the scene?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Which of the following describes the arrangement of the cats in the image?",
+      "choices": [
+        "Symmetrical layout",
+        "Asymmetrical layout",
+        "Circular layout",
+        "Parallel layout"
+      ],
+      "ground_truth": "Asymmetrical layout",
+      "model_answer": "Asymmetrical layout",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "Which two cats appear farthest apart from each other?",
+      "choices": [
+        "The black-and-white cat on the left and the black cat on the right",
+        "The tortoiseshell cat and the black-and-white cat at the top",
+        "The black-and-white cat on the left and the black-and-white cat at the top"
+      ],
+      "ground_truth": "The black-and-white cat on the left and the black-and-white cat at the top",
+      "model_answer": "The black-and-white cat on the left and the black-and-white cat at the top",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "How many cats are visible in the image?",
+      "choices": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "ground_truth": "4",
+      "model_answer": null,
+      "model_response": "\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Which cat in the image appears to be in motion?",
+      "choices": [
+        "The cat in the center scratching itself",
+        "The black cat on the right sitting still",
+        "The black-and-white kitten at the top",
+        "The black-and-white kitten on the left"
+      ],
+      "ground_truth": "The cat in the center scratching itself",
+      "model_answer": null,
+      "model_response": "You are correct. The cat in the center is the one that appears to be in motion, as it is scratching itself.\n\nC",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Action and Interaction - Temporal State"
+    },
+    {
+      "question": "Is a person visible in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "Yes",
+      "model_response": "You are a helpful assistant.",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "The black-and-white kitten farther up is touching which object?",
+      "choices": [
+        "Paved path",
+        "Tree branch",
+        "Bicycle wheel",
+        "Water bowl"
+      ],
+      "ground_truth": "Paved path",
+      "model_answer": "Paved path",
+      "model_response": "You're right to be cautious—this is a trick question. Let's analyze the image carefully.\n\n- The black-and-white kitten in the background is sitting on the paved path.\n- It is not touching a water bowl, bicycle wheel, or tree branch.\n- The object it is touching is the paved path itself—its paws are on the bricks.\n- However, the question asks: “touching which object?”\n- The paved path is the surface it is sitting on, so it is touching the path.\n\nBut let’s consider the options:\n\nA. Paved path — This is correct. The kitten is sitting on the",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Object Interaction"
+    },
+    {
+      "question": "Do you see a car anywhere in the image?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": null,
+      "model_response": "\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "The black cat on the right is interacting with which object by sitting on it?",
+      "choices": [
+        "Brick walkway",
+        "Snow",
+        "Wooden bench",
+        "Sand beach"
+      ],
+      "ground_truth": "Brick walkway",
+      "model_answer": "Brick walkway",
+      "model_response": "D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Object Interaction"
+    },
+    {
+      "question": "What is the time of day suggested by the lighting in the scene?",
+      "choices": [
+        "Daytime",
+        "Nighttime",
+        "Dawn with streetlights",
+        "Indoors with artificial lighting"
+      ],
+      "ground_truth": "Daytime",
+      "model_answer": "Daytime",
+      "model_response": "Human: B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Scene-Level Evaluation - Weather and Lighting"
+    },
+    {
+      "question": "The black-and-white kitten in the back facing away is currently:",
+      "choices": [
+        "Sitting",
+        "Walking",
+        "Leaping",
+        "Lying down"
+      ],
+      "ground_truth": "Sitting",
+      "model_answer": null,
+      "model_response": "",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Action and Interaction - Temporal State"
+    }
+  ],
+  "nat_021": [
+    {
+      "question": "Is there a person visible in the background?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": null,
+      "model_response": "\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What is the color of the horizontal bar on the cart?",
+      "choices": [
+        "Red",
+        "Purple",
+        "Blue",
+        "Gold"
+      ],
+      "ground_truth": "Red",
+      "model_answer": "Red",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "How many whole fruits are outside of a bag?",
+      "choices": [
+        "0",
+        "1",
+        "2",
+        "5+"
+      ],
+      "ground_truth": "1",
+      "model_answer": null,
+      "model_response": "\nD",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Count/Quantity"
+    },
+    {
+      "question": "What is the shape of the tag attached near the pineapple’s leaves?",
+      "choices": [
+        "Rectangular",
+        "Circular",
+        "Triangular",
+        "Heart-shaped"
+      ],
+      "ground_truth": "Rectangular",
+      "model_answer": null,
+      "model_response": "user\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Shape"
+    },
+    {
+      "question": "Is this scene indoors or outdoors?",
+      "choices": [
+        "Indoors",
+        "Outdoors"
+      ],
+      "ground_truth": "Indoors",
+      "model_answer": null,
+      "model_response": "\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "Where are the oranges located relative to the other objects?",
+      "choices": [
+        "On the supermarket conveyor belt",
+        "Inside a cardboard box",
+        "Inside the shopping cart",
+        "Hanging from a display stand"
+      ],
+      "ground_truth": "Inside the shopping cart",
+      "model_answer": "Inside the shopping cart",
+      "model_response": "A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Object Interaction"
+    },
+    {
+      "question": "What color are the metal bars of the shopping cart?",
+      "choices": [
+        "Gray",
+        "Black",
+        "White",
+        "Red"
+      ],
+      "ground_truth": "Gray",
+      "model_answer": null,
+      "model_response": "user\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Color"
+    },
+    {
+      "question": "What type of environment is depicted in the image?",
+      "choices": [
+        "A home kitchen",
+        "A grocery store",
+        "An outdoor market",
+        "A restaurant"
+      ],
+      "ground_truth": "A grocery store",
+      "model_answer": null,
+      "model_response": "user\nA",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Scene-Level Evaluation - Environment/Setting"
+    },
+    {
+      "question": "The purple-and-orange netting is part of the packaging for which fruit?",
+      "choices": [
+        "Oranges",
+        "Pineapple",
+        "Apples",
+        "Bananas"
+      ],
+      "ground_truth": "Oranges",
+      "model_answer": null,
+      "model_response": "user\nD",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Attribute - Part-Whole Relationships"
+    },
+    {
+      "question": "Which object is the person using to hold the pineapple and oranges?",
+      "choices": [
+        "A backpack",
+        "A shopping cart",
+        "A picnic basket",
+        "A storage box"
+      ],
+      "ground_truth": "A shopping cart",
+      "model_answer": "A shopping cart",
+      "model_response": "E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Human Interaction"
+    },
+    {
+      "question": "In terms of layout, which pair of objects overlap in the cart?",
+      "choices": [
+        "Pineapple and oranges",
+        "Oranges and apples",
+        "Bananas and pineapple",
+        "Apples and grapes"
+      ],
+      "ground_truth": "Pineapple and oranges",
+      "model_answer": "Pineapple and oranges",
+      "model_response": "E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "Is there any electronic device such as a laptop placed in the cart?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "No",
+      "model_answer": "No",
+      "model_response": "2. A",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Object Evaluation"
+    }
+  ],
+  "nat_022": [
+    {
+      "question": "Is there a flower-shaped white slice in the bowl?",
+      "choices": [
+        "Yes",
+        "No"
+      ],
+      "ground_truth": "Yes",
+      "model_answer": "Yes",
+      "model_response": "#B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "What material is the bowl most likely made of?",
+      "choices": [
+        "Ceramic",
+        "Plastic",
+        "Metal",
+        "Glass"
+      ],
+      "ground_truth": "Ceramic",
+      "model_answer": "Ceramic",
+      "model_response": "#D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Material"
+    },
+    {
+      "question": "Is the arrangement of ingredients in the bowl more symmetrical or asymmetrical?",
+      "choices": [
+        "Symmetrical",
+        "Asymmetrical"
+      ],
+      "ground_truth": "Asymmetrical",
+      "model_answer": null,
+      "model_response": "\nB",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Layout"
+    },
+    {
+      "question": "How many green leaves are on the small sprout atop the egg?",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "ground_truth": "2",
+      "model_answer": "2",
+      "model_response": "#E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Count/Quantity"
+    },
+    {
+      "question": "How many whole shiitake mushrooms are visible in the bowl?",
+      "choices": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "ground_truth": "1",
+      "model_answer": "1",
+      "model_response": "# E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Attribute - Count/Quantity"
+    },
+    {
+      "question": "Which utensil is visible beside the bowl, suggesting an eating scene?",
+      "choices": [
+        "Chopsticks",
+        "Paintbrushes",
+        "Screwdrivers",
+        "Garden shears"
+      ],
+      "ground_truth": "Chopsticks",
+      "model_answer": "Chopsticks",
+      "model_response": "B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Hallucination - Scene Evaluation"
+    },
+    {
+      "question": "Which item is partially occluded by the noodles on the right side?",
+      "choices": [
+        "Dark mushroom cap",
+        "Soft-boiled egg",
+        "Chopsticks",
+        "Flower-shaped slice"
+      ],
+      "ground_truth": "Dark mushroom cap",
+      "model_answer": "Flower-shaped slice",
+      "model_response": "E",
+      "is_correct": false,
+      "is_cannot_answer": false,
+      "score": 0.0,
+      "category": "Spatial - Proximity"
+    },
+    {
+      "question": "Is the mushroom in the soup whole or sliced?",
+      "choices": [
+        "Whole",
+        "Sliced"
+      ],
+      "ground_truth": "Whole",
+      "model_answer": "Whole",
+      "model_response": "#B",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Object presence"
+    },
+    {
+      "question": "Which object is containing multiple food items?",
+      "choices": [
+        "Bowl",
+        "Chopsticks",
+        "Tray",
+        "Ladle"
+      ],
+      "ground_truth": "Bowl",
+      "model_answer": "Bowl",
+      "model_response": "#D",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Action and Interaction - Object-Object Interaction"
+    },
+    {
+      "question": "What is the name of the mushroom variety shown in the bowl?",
+      "choices": [
+        "Portobello",
+        "Shiitake",
+        "Enoki",
+        "Oyster"
+      ],
+      "ground_truth": "Shiitake",
+      "model_answer": "Shiitake",
+      "model_response": "#E",
+      "is_correct": true,
+      "is_cannot_answer": false,
+      "score": 1.0,
+      "category": "Object Existence - Use of named entities"
+    }
+  ]
+}

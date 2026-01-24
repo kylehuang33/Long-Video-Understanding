@@ -1,0 +1,180 @@
+{
+  "total_questions": 340,
+  "correct_answers": 255,
+  "overall_accuracy": 0.75,
+  "cannot_answer_count": 1,
+  "total_score": 255.3,
+  "average_score": 0.7509,
+  "category_metrics": {
+    "Spatial - Relationship": {
+      "total": 18,
+      "correct": 12,
+      "cannot_answer": 0,
+      "total_score": 12.0,
+      "accuracy": 0.6666666666666666,
+      "average_score": 0.6666666666666666
+    },
+    "Attribute - Count/Quantity": {
+      "total": 14,
+      "correct": 9,
+      "cannot_answer": 0,
+      "total_score": 9.0,
+      "accuracy": 0.6428571428571429,
+      "average_score": 0.6428571428571429
+    },
+    "Attribute - State": {
+      "total": 10,
+      "correct": 7,
+      "cannot_answer": 0,
+      "total_score": 7.0,
+      "accuracy": 0.7,
+      "average_score": 0.7
+    },
+    "Attribute - Color": {
+      "total": 26,
+      "correct": 18,
+      "cannot_answer": 0,
+      "total_score": 18.0,
+      "accuracy": 0.6923076923076923,
+      "average_score": 0.6923076923076923
+    },
+    "Object Existence - Use of named entities": {
+      "total": 13,
+      "correct": 11,
+      "cannot_answer": 0,
+      "total_score": 11.0,
+      "accuracy": 0.8461538461538461,
+      "average_score": 0.8461538461538461
+    },
+    "Scene-Level Evaluation - Environment/Setting": {
+      "total": 22,
+      "correct": 18,
+      "cannot_answer": 0,
+      "total_score": 18.0,
+      "accuracy": 0.8181818181818182,
+      "average_score": 0.8181818181818182
+    },
+    "Object Existence - Object presence": {
+      "total": 52,
+      "correct": 38,
+      "cannot_answer": 0,
+      "total_score": 38.0,
+      "accuracy": 0.7307692307692307,
+      "average_score": 0.7307692307692307
+    },
+    "Attribute - Part-Whole Relationships": {
+      "total": 14,
+      "correct": 11,
+      "cannot_answer": 0,
+      "total_score": 11.0,
+      "accuracy": 0.7857142857142857,
+      "average_score": 0.7857142857142857
+    },
+    "Hallucination - Scene Evaluation": {
+      "total": 27,
+      "correct": 21,
+      "cannot_answer": 0,
+      "total_score": 21.0,
+      "accuracy": 0.7777777777777778,
+      "average_score": 0.7777777777777778
+    },
+    "Spatial - Layout": {
+      "total": 25,
+      "correct": 19,
+      "cannot_answer": 0,
+      "total_score": 19.0,
+      "accuracy": 0.76,
+      "average_score": 0.76
+    },
+    "Attribute - Shape": {
+      "total": 11,
+      "correct": 7,
+      "cannot_answer": 0,
+      "total_score": 7.0,
+      "accuracy": 0.6363636363636364,
+      "average_score": 0.6363636363636364
+    },
+    "Spatial - Proximity": {
+      "total": 18,
+      "correct": 10,
+      "cannot_answer": 0,
+      "total_score": 10.0,
+      "accuracy": 0.5555555555555556,
+      "average_score": 0.5555555555555556
+    },
+    "Action and Interaction - Temporal State": {
+      "total": 6,
+      "correct": 4,
+      "cannot_answer": 0,
+      "total_score": 4.0,
+      "accuracy": 0.6666666666666666,
+      "average_score": 0.6666666666666666
+    },
+    "Attribute - Material": {
+      "total": 12,
+      "correct": 10,
+      "cannot_answer": 0,
+      "total_score": 10.0,
+      "accuracy": 0.8333333333333334,
+      "average_score": 0.8333333333333334
+    },
+    "Hallucination - Object Evaluation": {
+      "total": 21,
+      "correct": 18,
+      "cannot_answer": 0,
+      "total_score": 18.0,
+      "accuracy": 0.8571428571428571,
+      "average_score": 0.8571428571428571
+    },
+    "Action and Interaction - Object-Object Interaction": {
+      "total": 14,
+      "correct": 13,
+      "cannot_answer": 0,
+      "total_score": 13.0,
+      "accuracy": 0.9285714285714286,
+      "average_score": 0.9285714285714286
+    },
+    "Action and Interaction - Object-Human Interaction": {
+      "total": 6,
+      "correct": 4,
+      "cannot_answer": 0,
+      "total_score": 4.0,
+      "accuracy": 0.6666666666666666,
+      "average_score": 0.6666666666666666
+    },
+    "Hallucination - Action Evaluation": {
+      "total": 7,
+      "correct": 7,
+      "cannot_answer": 0,
+      "total_score": 7.0,
+      "accuracy": 1.0,
+      "average_score": 1.0
+    },
+    "Attribute - Size": {
+      "total": 7,
+      "correct": 4,
+      "cannot_answer": 0,
+      "total_score": 4.0,
+      "accuracy": 0.5714285714285714,
+      "average_score": 0.5714285714285714
+    },
+    "Attribute - Textual": {
+      "total": 3,
+      "correct": 3,
+      "cannot_answer": 0,
+      "total_score": 3.0,
+      "accuracy": 1.0,
+      "average_score": 1.0
+    },
+    "Scene-Level Evaluation - Weather and Lighting": {
+      "total": 14,
+      "correct": 11,
+      "cannot_answer": 1,
+      "total_score": 11.3,
+      "accuracy": 0.7857142857142857,
+      "average_score": 0.8071428571428572
+    }
+  },
+  "model": "Qwen/Qwen3-VL-8B-Instruct",
+  "split": "all"
+}
