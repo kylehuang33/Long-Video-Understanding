@@ -13,7 +13,7 @@ import pandas as pd
 from tqdm import tqdm
 import time
 import base64
-from openai import OpenAI
+import requests
 
 
 # Caption prompts (same as caption_qwen3vl.py)
@@ -79,24 +79,9 @@ def encode_image_base64(image_path: str) -> str:
         return base64.b64encode(f.read()).decode("utf-8")
 
 
-def get_image_url(image_path: str) -> str:
-    """Convert image path to data URL for vLLM."""
-    base64_image = encode_image_base64(image_path)
-    ext = Path(image_path).suffix.lower()
-    mime_type = {
-        '.jpg': 'image/jpeg',
-        '.jpeg': 'image/jpeg',
-        '.png': 'image/png',
-        '.gif': 'image/gif',
-        '.webp': 'image/webp',
-        '.bmp': 'image/bmp',
-    }.get(ext, 'image/jpeg')
-
-    return f"data:{mime_type};base64,{base64_image}"
-
 
 def caption_image_vllm(
-    client: OpenAI,
+    server_url: str,
     image_path: str,
     model: str,
     prompt: str,
@@ -106,7 +91,7 @@ def caption_image_vllm(
     Caption a single image using vLLM server.
 
     Args:
-        client: OpenAI client connected to vLLM server
+        server_url: vLLM server URL
         image_path: Path to image file
         model: Model name
         prompt: Caption prompt
@@ -115,10 +100,13 @@ def caption_image_vllm(
     Returns:
         Generated caption
     """
+    image_base64 = encode_image_base64(image_path)
     content = [
         {
             "type": "image_url",
-            "image_url": {"url": get_image_url(image_path)}
+            "image_url": {
+                "url": f"data:image/jpeg;base64,{image_base64}"
+            }
         },
         {
             "type": "text",
@@ -126,17 +114,27 @@ def caption_image_vllm(
         }
     ]
 
-    response = client.chat.completions.create(
-        model=model,
-        messages=[{
-            "role": "user",
-            "content": content
-        }],
-        max_tokens=max_tokens,
-        temperature=0.0
+    messages = [{
+        "role": "user",
+        "content": content
+    }]
+
+    response = requests.post(
+        f"{server_url}/v1/chat/completions",
+        json={
+            "model": model,
+            "messages": messages,
+            "max_tokens": max_tokens,
+            "temperature": 0.0
+        },
+        headers={"Content-Type": "application/json"}
     )
 
-    return response.choices[0].message.content.strip()
+    if response.status_code != 200:
+        raise Exception(f"Server error: {response.status_code} - {response.text}")
+
+    result = response.json()
+    return result['choices'][0]['message']['content'].strip()
 
 
 def collect_all_images(df: pd.DataFrame, dataset_root: str) -> Set[str]:
@@ -204,12 +202,8 @@ def caption_images(
     print(f"Loaded {len(df)} rows")
     print(f"Columns: {df.columns.tolist()}\n")
 
-    # Initialize OpenAI client for vLLM
-    print(f"Connecting to vLLM server at {vllm_url}")
-    client = OpenAI(
-        api_key="EMPTY",
-        base_url=vllm_url
-    )
+    # vLLM server URL
+    print(f"Using vLLM server at {vllm_url}")
 
     # Collect all unique images
     print("\nCollecting all unique images...")
@@ -235,7 +229,7 @@ def caption_images(
 
         try:
             caption = caption_image_vllm(
-                client=client,
+                server_url=vllm_url,
                 image_path=img_path,
                 model=model,
                 prompt=caption_prompt,

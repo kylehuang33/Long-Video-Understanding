@@ -13,7 +13,7 @@ import pandas as pd
 from tqdm import tqdm
 import time
 import base64
-from openai import OpenAI
+import requests
 
 
 def _looks_like_path(value: str) -> bool:
@@ -71,25 +71,10 @@ def encode_image_base64(image_path: str) -> str:
         return base64.b64encode(f.read()).decode("utf-8")
 
 
-def get_image_url(image_path: str) -> str:
-    """Convert image path to data URL for vLLM."""
-    base64_image = encode_image_base64(image_path)
-    # Detect image format from extension
-    ext = Path(image_path).suffix.lower()
-    mime_type = {
-        '.jpg': 'image/jpeg',
-        '.jpeg': 'image/jpeg',
-        '.png': 'image/png',
-        '.gif': 'image/gif',
-        '.webp': 'image/webp',
-        '.bmp': 'image/bmp',
-    }.get(ext, 'image/jpeg')
-
-    return f"data:{mime_type};base64,{base64_image}"
 
 
 def answer_question_vllm(
-    client: OpenAI,
+    server_url: str,
     image_paths: List[str],
     question: str,
     model: str,
@@ -100,7 +85,7 @@ def answer_question_vllm(
     Answer a question using vLLM server.
 
     Args:
-        client: OpenAI client connected to vLLM server
+        server_url: vLLM server URL
         image_paths: List of image file paths
         question: Question text (may contain <image> placeholder)
         model: Model name
@@ -115,9 +100,12 @@ def answer_question_vllm(
 
     # Add images
     for img_path in image_paths:
+        image_base64 = encode_image_base64(img_path)
         content.append({
             "type": "image_url",
-            "image_url": {"url": get_image_url(img_path)}
+            "image_url": {
+                "url": f"data:image/jpeg;base64,{image_base64}"
+            }
         })
 
     # Add question text (remove <image> placeholder as we're adding images separately)
@@ -127,18 +115,29 @@ def answer_question_vllm(
         "text": question_text
     })
 
-    # Call vLLM server
-    response = client.chat.completions.create(
-        model=model,
-        messages=[{
-            "role": "user",
-            "content": content
-        }],
-        max_tokens=max_tokens,
-        temperature=temperature
+    # Build messages
+    messages = [{
+        "role": "user",
+        "content": content
+    }]
+
+    # Make API call
+    response = requests.post(
+        f"{server_url}/v1/chat/completions",
+        json={
+            "model": model,
+            "messages": messages,
+            "max_tokens": max_tokens,
+            "temperature": temperature
+        },
+        headers={"Content-Type": "application/json"}
     )
 
-    return response.choices[0].message.content.strip()
+    if response.status_code != 200:
+        raise Exception(f"Server error: {response.status_code} - {response.text}")
+
+    result = response.json()
+    return result['choices'][0]['message']['content'].strip()
 
 
 def process_parquet(
@@ -179,12 +178,8 @@ def process_parquet(
     print(f"Loaded {len(df)} rows")
     print(f"Columns: {df.columns.tolist()}\n")
 
-    # Initialize OpenAI client for vLLM
-    print(f"Connecting to vLLM server at {vllm_url}")
-    client = OpenAI(
-        api_key="EMPTY",  # vLLM doesn't require API key
-        base_url=vllm_url
-    )
+    # vLLM server URL
+    print(f"Using vLLM server at {vllm_url}")
 
     # Load existing results if available
     results = {}
@@ -229,7 +224,7 @@ def process_parquet(
 
             # Generate answer
             predicted_answer = answer_question_vllm(
-                client=client,
+                server_url=vllm_url,
                 image_paths=image_paths,
                 question=question,
                 model=model,

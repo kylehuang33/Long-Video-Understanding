@@ -325,7 +325,7 @@ python qa_direct_vllm.py \
 
 All scripts require:
 ```bash
-pip install pandas pyarrow openai tqdm
+pip install pandas pyarrow requests tqdm
 ```
 
 The vLLM server should be running separately:
@@ -333,6 +333,8 @@ The vLLM server should be running separately:
 pip install vllm
 vllm serve Qwen/Qwen3-VL-4B-Instruct --port 8000
 ```
+
+**Note**: The scripts use `requests` library to call vLLM server API directly (not the OpenAI client library).
 
 ## Notes
 

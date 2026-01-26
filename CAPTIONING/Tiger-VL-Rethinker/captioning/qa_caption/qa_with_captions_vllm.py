@@ -12,7 +12,7 @@ from typing import Dict, Optional
 import pandas as pd
 from tqdm import tqdm
 import time
-from openai import OpenAI
+import requests
 
 
 def _looks_like_path(value: str) -> bool:
@@ -65,7 +65,7 @@ def make_model_safe(model: Optional[str]) -> str:
 
 
 def answer_question_text_only(
-    client: OpenAI,
+    server_url: str,
     question: str,
     model: str,
     max_tokens: int = 512,
@@ -75,7 +75,7 @@ def answer_question_text_only(
     Answer a text-only question using vLLM server.
 
     Args:
-        client: OpenAI client connected to vLLM server
+        server_url: vLLM server URL
         question: Question text (with captions replacing <image>)
         model: Model name
         max_tokens: Maximum tokens to generate
@@ -84,17 +84,27 @@ def answer_question_text_only(
     Returns:
         Generated answer
     """
-    response = client.chat.completions.create(
-        model=model,
-        messages=[{
-            "role": "user",
-            "content": question
-        }],
-        max_tokens=max_tokens,
-        temperature=temperature
+    messages = [{
+        "role": "user",
+        "content": question
+    }]
+
+    response = requests.post(
+        f"{server_url}/v1/chat/completions",
+        json={
+            "model": model,
+            "messages": messages,
+            "max_tokens": max_tokens,
+            "temperature": temperature
+        },
+        headers={"Content-Type": "application/json"}
     )
 
-    return response.choices[0].message.content.strip()
+    if response.status_code != 200:
+        raise Exception(f"Server error: {response.status_code} - {response.text}")
+
+    result = response.json()
+    return result['choices'][0]['message']['content'].strip()
 
 
 def qa_with_captions(
@@ -158,12 +168,8 @@ def qa_with_captions(
     print(f"Loaded {len(df)} rows")
     print(f"Columns: {df.columns.tolist()}\n")
 
-    # Initialize OpenAI client for vLLM
-    print(f"Connecting to vLLM server at {vllm_url}")
-    client = OpenAI(
-        api_key="EMPTY",
-        base_url=vllm_url
-    )
+    # vLLM server URL
+    print(f"Using vLLM server at {vllm_url}")
 
     # Load existing results if available
     results = {}
@@ -219,7 +225,7 @@ def qa_with_captions(
 
             # Generate answer using text-only question
             predicted_answer = answer_question_text_only(
-                client=client,
+                server_url=vllm_url,
                 question=question,
                 model=model,
                 max_tokens=max_tokens,

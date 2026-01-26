@@ -130,7 +130,7 @@ cd qa_caption
 
 1. **Install dependencies**:
 ```bash
-pip install pandas pyarrow openai tqdm
+pip install pandas pyarrow requests tqdm
 ```
 
 2. **Start vLLM server**:
@@ -143,6 +143,8 @@ vllm serve Qwen/Qwen3-VL-4B-Instruct --port 8000
 cd qa_direct  # or qa_caption
 ./run_*.sh
 ```
+
+**Note**: Scripts use `requests.post()` to call vLLM server API directly (same pattern as `@CAPTIONING/CaptionQA/server/qa_image.py`).
 
 ## Customization
 
