@@ -81,7 +81,7 @@ def encode_image_base64(image_path: str) -> str:
 
 
 def caption_image_vllm(
-    client: OpenAI,
+    server_url: str,
     image_path: str,
     model: str,
     prompt: str = "Describe this image in detail.",
@@ -91,7 +91,7 @@ def caption_image_vllm(
     Caption a single image using vLLM server.
 
     Args:
-        client: OpenAI client connected to vLLM server
+        server_url: vLLM server URL
         image_path: Path to image file
         model: Model name
         prompt: Caption prompt
@@ -100,10 +100,13 @@ def caption_image_vllm(
     Returns:
         Generated caption
     """
+    image_base64 = encode_image_base64(image_path)
     content = [
         {
             "type": "image_url",
-            "image_url": {"url": get_image_url(image_path)}
+            "image_url": {
+                "url": f"data:image/jpeg;base64,{image_base64}"
+            }
         },
         {
             "type": "text",
@@ -111,17 +114,27 @@ def caption_image_vllm(
         }
     ]
 
-    response = client.chat.completions.create(
-        model=model,
-        messages=[{
-            "role": "user",
-            "content": content
-        }],
-        max_tokens=max_tokens,
-        temperature=0.0
+    messages = [{
+        "role": "user",
+        "content": content
+    }]
+
+    response = requests.post(
+        f"{server_url}/v1/chat/completions",
+        json={
+            "model": model,
+            "messages": messages,
+            "max_tokens": max_tokens,
+            "temperature": 0.0
+        },
+        headers={"Content-Type": "application/json"}
     )
 
-    return response.choices[0].message.content.strip()
+    if response.status_code != 200:
+        raise Exception(f"Server error: {response.status_code} - {response.text}")
+
+    result = response.json()
+    return result['choices'][0]['message']['content'].strip()
 
 
 def answer_question_text_only(
@@ -186,7 +199,7 @@ def collect_all_images(df: pd.DataFrame, dataset_root: str) -> Set[str]:
 
 
 def caption_all_images(
-    client: OpenAI,
+    server_url: str,
     image_paths: Set[str],
     caption_output_path: str,
     model: str,
@@ -198,7 +211,7 @@ def caption_all_images(
     Caption all images and save to JSON.
 
     Args:
-        client: OpenAI client
+        server_url: vLLM server URL
         image_paths: Set of image paths to caption
         caption_output_path: Path to save captions JSON
         model: Model name
@@ -321,7 +334,7 @@ def process_parquet_with_captions(
     # Step 2: Caption all images
     print("\nStep 2: Captioning all images...")
     captions = caption_all_images(
-        client=client,
+        server_url=vllm_url,
         image_paths=all_images,
         caption_output_path=caption_output_path,
         model=caption_model,
