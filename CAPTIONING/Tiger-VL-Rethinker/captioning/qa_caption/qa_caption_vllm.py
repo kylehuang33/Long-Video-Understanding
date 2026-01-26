@@ -241,7 +241,7 @@ def caption_all_images(
 
         try:
             caption = caption_image_vllm(
-                server_url=vllm_url,
+                server_url=server_url,
                 image_path=img_path,
                 model=model,
                 prompt=caption_prompt,
