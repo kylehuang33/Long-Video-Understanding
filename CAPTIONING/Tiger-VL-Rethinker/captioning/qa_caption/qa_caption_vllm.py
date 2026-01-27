@@ -7,13 +7,17 @@ First captions all images, then answers questions using captions instead of imag
 import argparse
 import json
 import os
+import re
 from pathlib import Path
-from typing import Dict, List, Set, Optional
+from typing import Dict, List, Optional
 import pandas as pd
 from tqdm import tqdm
 import time
 import base64
 import requests
+
+
+LETTER_ALPH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
 # Caption prompts (same as caption_qwen3vl.py)
@@ -78,6 +82,95 @@ def encode_image_base64(image_path: str) -> str:
     with open(image_path, "rb") as f:
         return base64.b64encode(f.read()).decode("utf-8")
 
+
+def extract_letter(answer_text: str, num_options: int) -> Optional[str]:
+    """Extract answer letter from model output."""
+    if not answer_text:
+        return None
+
+    # If response contains </think>, extract letter from text after it
+    if "</think>" in answer_text:
+        after_think = answer_text.split("</think>", 1)[1]
+        answer_text = after_think
+
+    if "Answer: " in answer_text:
+        after_answer = answer_text.split("Answer: ", 1)[1]
+        answer_text = after_answer
+
+    if "\n" in answer_text:
+        after_n = answer_text.split("\n", 1)[0]
+        answer_text = after_n
+
+    # Look for letter pattern
+    m = re.search(r"\b([A-Z])\b", answer_text.upper())
+    if m:
+        letter = m.group(1)
+        idx = LETTER_ALPH.find(letter)
+        if 0 <= idx < max(1, num_options):
+            return letter
+
+    # Look for number pattern
+    m = re.search(r"\b([1-9][0-9]?)\b", answer_text)
+    if m:
+        k = int(m.group(1))
+        if 1 <= k <= max(1, num_options):
+            return LETTER_ALPH[k - 1]
+
+    return None
+
+
+def extract_ground_truth_letter(answer: str) -> Optional[str]:
+    """Extract letter from ground truth answer like '\\boxed{A}'."""
+    if not answer:
+        return None
+
+    # Match \boxed{A} or \boxed{B} etc.
+    m = re.search(r'\\boxed\{([A-Z])\}', answer)
+    if m:
+        return m.group(1)
+
+    # Direct letter match
+    m = re.search(r'\b([A-Z])\b', answer.upper())
+    if m:
+        return m.group(1)
+
+    return None
+
+
+def count_options(question: str) -> int:
+    """Count number of options in question."""
+    # Count patterns like (A), (B), (C)
+    matches = re.findall(r'\([A-Z]\)', question)
+    return len(matches)
+
+
+def compute_metrics(results: Dict) -> Dict:
+    """Compute evaluation metrics from results."""
+    total_questions = len(results)
+    correct_answers = sum(1 for v in results.values() if v.get('is_correct', False))
+
+    overall_accuracy = correct_answers / total_questions if total_questions > 0 else 0.0
+
+    # Per-category metrics
+    category_metrics = {}
+    for qid, item in results.items():
+        category = item.get('category', 'unknown')
+        if category not in category_metrics:
+            category_metrics[category] = {'total': 0, 'correct': 0}
+        category_metrics[category]['total'] += 1
+        if item.get('is_correct', False):
+            category_metrics[category]['correct'] += 1
+
+    # Compute accuracy per category
+    for category, stats in category_metrics.items():
+        stats['accuracy'] = stats['correct'] / stats['total'] if stats['total'] > 0 else 0.0
+
+    return {
+        'total_questions': total_questions,
+        'correct_answers': correct_answers,
+        'overall_accuracy': round(overall_accuracy, 4),
+        'category_metrics': category_metrics
+    }
 
 
 def caption_image_vllm(
@@ -180,9 +273,14 @@ def answer_question_text_only(
     return result['choices'][0]['message']['content'].strip()
 
 
-def collect_all_images(df: pd.DataFrame, dataset_root: str) -> Set[str]:
-    """Collect all unique image paths from the dataframe."""
-    all_images = set()
+def collect_all_images(df: pd.DataFrame, dataset_root: str) -> Dict[str, str]:
+    """
+    Collect all unique image paths from the dataframe.
+
+    Returns:
+        Dictionary mapping relative paths (from parquet) to absolute paths
+    """
+    image_map = {}
     for idx, row in df.iterrows():
         image_array = row['image']
         if isinstance(image_array, str):
@@ -193,14 +291,14 @@ def collect_all_images(df: pd.DataFrame, dataset_root: str) -> Set[str]:
         for img in image_paths:
             full_path = os.path.join(dataset_root, img)
             if os.path.exists(full_path):
-                all_images.add(full_path)
+                image_map[img] = full_path  # Map relative to absolute
 
-    return all_images
+    return image_map
 
 
 def caption_all_images(
     server_url: str,
-    image_paths: Set[str],
+    image_map: Dict[str, str],
     caption_output_path: str,
     model: str,
     caption_prompt: str = "Describe this image in detail.",
@@ -212,7 +310,7 @@ def caption_all_images(
 
     Args:
         server_url: vLLM server URL
-        image_paths: Set of image paths to caption
+        image_map: Dictionary mapping relative paths to absolute paths
         caption_output_path: Path to save captions JSON
         model: Model name
         caption_prompt: Prompt for captioning
@@ -220,7 +318,7 @@ def caption_all_images(
         overwrite: Whether to overwrite existing captions
 
     Returns:
-        Dictionary mapping image paths to captions
+        Dictionary mapping relative image paths to captions
     """
     # Load existing captions if available
     captions = {}
@@ -230,24 +328,24 @@ def caption_all_images(
         print(f"Loaded {len(captions)} existing captions")
 
     # Caption images
-    print(f"\nCaptioning {len(image_paths)} images...")
+    print(f"\nCaptioning {len(image_map)} images...")
     success_count = 0
     error_count = 0
 
-    for img_path in tqdm(sorted(image_paths), desc="Captioning"):
+    for relative_path, absolute_path in tqdm(sorted(image_map.items()), desc="Captioning"):
         # Skip if already captioned
-        if img_path in captions and not overwrite:
+        if relative_path in captions and not overwrite:
             continue
 
         try:
             caption = caption_image_vllm(
                 server_url=server_url,
-                image_path=img_path,
+                image_path=absolute_path,
                 model=model,
                 prompt=caption_prompt,
                 max_tokens=max_tokens
             )
-            captions[img_path] = caption
+            captions[relative_path] = caption  # Use relative path as key
             success_count += 1
 
             # Incremental save
@@ -255,7 +353,7 @@ def caption_all_images(
                 json.dump(captions, f, indent=2, ensure_ascii=False)
 
         except Exception as e:
-            print(f"\nError captioning {img_path}: {e}")
+            print(f"\nError captioning {relative_path}: {e}")
             error_count += 1
             continue
 
@@ -313,9 +411,11 @@ def process_parquet_with_captions(
     qa_out_dir = os.path.join(output_dir, "qa_results", qa_model_safe)
     os.makedirs(qa_out_dir, exist_ok=True)
     output_path = os.path.join(qa_out_dir, f"{qa_model_safe}_with_{caption_model_safe}_{prompt_style.lower()}.json")
+    metrics_path = os.path.join(qa_out_dir, f"{qa_model_safe}_with_{caption_model_safe}_{prompt_style.lower()}_metrics.json")
 
     print(f"Caption output: {caption_output_path}")
-    print(f"QA output: {output_path}\n")
+    print(f"QA output: {output_path}")
+    print(f"Metrics output: {metrics_path}\n")
 
     # Load parquet file
     print(f"Loading parquet file: {parquet_path}")
@@ -328,14 +428,14 @@ def process_parquet_with_captions(
 
     # Step 1: Collect all unique images
     print("\nStep 1: Collecting all unique images...")
-    all_images = collect_all_images(df, dataset_root)
-    print(f"Found {len(all_images)} unique images")
+    image_map = collect_all_images(df, dataset_root)
+    print(f"Found {len(image_map)} unique images")
 
     # Step 2: Caption all images
     print("\nStep 2: Captioning all images...")
     captions = caption_all_images(
         server_url=vllm_url,
-        image_paths=all_images,
+        image_map=image_map,
         caption_output_path=caption_output_path,
         model=caption_model,
         caption_prompt=caption_prompt,
@@ -364,27 +464,24 @@ def process_parquet_with_captions(
             continue
 
         try:
-            # Get image paths
+            # Get image paths (relative from parquet)
             image_array = row['image']
             if isinstance(image_array, str):
-                image_paths = [image_array]
+                image_paths_relative = [image_array]
             else:
-                image_paths = list(image_array)
+                image_paths_relative = list(image_array)
 
-            # Convert to absolute paths
-            image_paths = [os.path.join(dataset_root, img) for img in image_paths]
-
-            # Get captions for images
+            # Get captions for images (captions use relative paths as keys)
             image_captions = []
-            for img_path in image_paths:
-                if img_path in captions:
-                    image_captions.append(captions[img_path])
+            for img_path_rel in image_paths_relative:
+                if img_path_rel in captions:
+                    image_captions.append(captions[img_path_rel])
                 else:
-                    print(f"\nWarning: No caption found for {img_path}")
+                    print(f"\nWarning: No caption found for {img_path_rel}")
                     error_count += 1
                     continue
 
-            if len(image_captions) != len(image_paths):
+            if len(image_captions) != len(image_paths_relative):
                 continue
 
             # Replace <image> with captions
@@ -393,26 +490,42 @@ def process_parquet_with_captions(
             for caption in image_captions:
                 question = question.replace("<image>", f"[Image: {caption}]", 1)
 
+            # Add instruction prefix
+            full_prompt = f"Please read the image description and choose only one option.\n\n{question}"
+
             ground_truth = row['answer']
 
+            # Count options and extract ground truth letter
+            num_options = count_options(row['question'])
+            gt_letter = extract_ground_truth_letter(ground_truth)
+
             # Generate answer using text-only question
-            predicted_answer = answer_question_text_only(
+            raw_output = answer_question_text_only(
                 server_url=vllm_url,
-                question=question,
+                question=full_prompt,
                 model=qa_model,
                 max_tokens=max_tokens,
                 temperature=temperature
             )
+
+            # Extract predicted letter
+            predicted_letter = extract_letter(raw_output, num_options)
+
+            # Check if correct
+            is_correct = (predicted_letter == gt_letter) if (predicted_letter and gt_letter) else False
 
             # Save result
             results[qid] = {
                 'question_original': row['question'],
                 'question_with_captions': question,
                 'ground_truth': ground_truth,
-                'predicted_answer': predicted_answer,
+                'ground_truth_letter': gt_letter,
+                'raw_output': raw_output,
+                'predicted_letter': predicted_letter,
+                'is_correct': is_correct,
                 'category': row['category'],
                 'source': row['source'],
-                'image_paths': image_paths,
+                'image_paths': image_paths_relative,  # Use relative paths
                 'captions': image_captions
             }
             success_count += 1
@@ -430,6 +543,17 @@ def process_parquet_with_captions(
     with open(output_path, 'w') as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
+    # Compute and save metrics
+    metrics = compute_metrics(results)
+    metrics['model'] = qa_model
+    metrics['caption_model'] = caption_model
+    metrics['prompt_style'] = prompt_style
+    metrics['vllm_url'] = vllm_url
+    metrics['total_time_seconds'] = round(time.time() - start_time, 2)
+
+    with open(metrics_path, 'w') as f:
+        json.dump(metrics, f, indent=2, ensure_ascii=False)
+
     # Print summary
     elapsed = time.time() - start_time
     print(f"\n{'='*60}")
@@ -437,9 +561,11 @@ def process_parquet_with_captions(
     print(f"{'='*60}")
     print(f"Total questions: {len(df)}")
     print(f"Successfully answered: {success_count}")
+    print(f"Correct answers: {metrics['correct_answers']} ({metrics['overall_accuracy']:.2%})")
     print(f"Errors: {error_count}")
     print(f"Results saved to: {output_path}")
     print(f"Captions saved to: {caption_output_path}")
+    print(f"Metrics saved to: {metrics_path}")
     print(f"Total time: {elapsed:.2f}s ({elapsed/60:.2f}m)")
     if success_count > 0:
         print(f"Average time per question: {elapsed/success_count:.2f}s")

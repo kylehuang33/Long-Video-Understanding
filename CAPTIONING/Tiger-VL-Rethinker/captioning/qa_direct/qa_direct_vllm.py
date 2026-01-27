@@ -7,6 +7,7 @@ Reads parquet file, sends images + questions to vLLM server, gets answers.
 import argparse
 import json
 import os
+import re
 from pathlib import Path
 from typing import Dict, List, Optional
 import pandas as pd
@@ -14,6 +15,9 @@ from tqdm import tqdm
 import time
 import base64
 import requests
+
+
+LETTER_ALPH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
 def _looks_like_path(value: str) -> bool:
@@ -71,6 +75,65 @@ def encode_image_base64(image_path: str) -> str:
         return base64.b64encode(f.read()).decode("utf-8")
 
 
+def extract_letter(answer_text: str, num_options: int) -> Optional[str]:
+    """Extract answer letter from model output."""
+    if not answer_text:
+        return None
+
+    # If response contains </think>, extract letter from text after it
+    if "</think>" in answer_text:
+        after_think = answer_text.split("</think>", 1)[1]
+        answer_text = after_think
+
+    if "Answer: " in answer_text:
+        after_answer = answer_text.split("Answer: ", 1)[1]
+        answer_text = after_answer
+
+    if "\n" in answer_text:
+        after_n = answer_text.split("\n", 1)[0]
+        answer_text = after_n
+
+    # Look for letter pattern
+    m = re.search(r"\b([A-Z])\b", answer_text.upper())
+    if m:
+        letter = m.group(1)
+        idx = LETTER_ALPH.find(letter)
+        if 0 <= idx < max(1, num_options):
+            return letter
+
+    # Look for number pattern
+    m = re.search(r"\b([1-9][0-9]?)\b", answer_text)
+    if m:
+        k = int(m.group(1))
+        if 1 <= k <= max(1, num_options):
+            return LETTER_ALPH[k - 1]
+
+    return None
+
+
+def extract_ground_truth_letter(answer: str) -> Optional[str]:
+    """Extract letter from ground truth answer like '\\boxed{A}'."""
+    if not answer:
+        return None
+
+    # Match \boxed{A} or \boxed{B} etc.
+    m = re.search(r'\\boxed\{([A-Z])\}', answer)
+    if m:
+        return m.group(1)
+
+    # Direct letter match
+    m = re.search(r'\b([A-Z])\b', answer.upper())
+    if m:
+        return m.group(1)
+
+    return None
+
+
+def count_options(question: str) -> int:
+    """Count number of options in question."""
+    # Count patterns like (A), (B), (C)
+    matches = re.findall(r'\([A-Z]\)', question)
+    return len(matches)
 
 
 def answer_question_vllm(
@@ -110,9 +173,13 @@ def answer_question_vllm(
 
     # Add question text (remove <image> placeholder as we're adding images separately)
     question_text = question.replace("<image>", "").strip()
+
+    # Add instruction prefix
+    full_prompt = f"Please look at the image and choose only one option.\n\n{question_text}"
+
     content.append({
         "type": "text",
-        "text": question_text
+        "text": full_prompt
     })
 
     # Build messages
@@ -138,6 +205,35 @@ def answer_question_vllm(
 
     result = response.json()
     return result['choices'][0]['message']['content'].strip()
+
+
+def compute_metrics(results: Dict) -> Dict:
+    """Compute evaluation metrics from results."""
+    total_questions = len(results)
+    correct_answers = sum(1 for v in results.values() if v.get('is_correct', False))
+
+    overall_accuracy = correct_answers / total_questions if total_questions > 0 else 0.0
+
+    # Per-category metrics
+    category_metrics = {}
+    for qid, item in results.items():
+        category = item.get('category', 'unknown')
+        if category not in category_metrics:
+            category_metrics[category] = {'total': 0, 'correct': 0}
+        category_metrics[category]['total'] += 1
+        if item.get('is_correct', False):
+            category_metrics[category]['correct'] += 1
+
+    # Compute accuracy per category
+    for category, stats in category_metrics.items():
+        stats['accuracy'] = stats['correct'] / stats['total'] if stats['total'] > 0 else 0.0
+
+    return {
+        'total_questions': total_questions,
+        'correct_answers': correct_answers,
+        'overall_accuracy': round(overall_accuracy, 4),
+        'category_metrics': category_metrics
+    }
 
 
 def process_parquet(
@@ -170,7 +266,9 @@ def process_parquet(
     out_dir = os.path.join(output_dir, model_safe)
     os.makedirs(out_dir, exist_ok=True)
     output_path = os.path.join(out_dir, f"{model_safe}_results.json")
-    print(f"Output will be saved to: {output_path}\n")
+    metrics_path = os.path.join(out_dir, f"{model_safe}_metrics.json")
+    print(f"Output will be saved to: {output_path}")
+    print(f"Metrics will be saved to: {metrics_path}\n")
 
     # Load parquet file
     print(f"Loading parquet file: {parquet_path}")
@@ -222,8 +320,12 @@ def process_parquet(
             question = row['question']
             ground_truth = row['answer']
 
+            # Count options and extract ground truth letter
+            num_options = count_options(question)
+            gt_letter = extract_ground_truth_letter(ground_truth)
+
             # Generate answer
-            predicted_answer = answer_question_vllm(
+            raw_output = answer_question_vllm(
                 server_url=vllm_url,
                 image_paths=image_paths,
                 question=question,
@@ -232,14 +334,23 @@ def process_parquet(
                 temperature=temperature
             )
 
+            # Extract predicted letter
+            predicted_letter = extract_letter(raw_output, num_options)
+
+            # Check if correct
+            is_correct = (predicted_letter == gt_letter) if (predicted_letter and gt_letter) else False
+
             # Save result
             results[qid] = {
                 'question': question,
                 'ground_truth': ground_truth,
-                'predicted_answer': predicted_answer,
+                'ground_truth_letter': gt_letter,
+                'raw_output': raw_output,
+                'predicted_letter': predicted_letter,
+                'is_correct': is_correct,
                 'category': row['category'],
                 'source': row['source'],
-                'image_paths': image_paths
+                'image_paths': [str(Path(img).relative_to(dataset_root)) for img in image_paths]
             }
             success_count += 1
 
@@ -256,6 +367,15 @@ def process_parquet(
     with open(output_path, 'w') as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
+    # Compute and save metrics
+    metrics = compute_metrics(results)
+    metrics['model'] = model
+    metrics['vllm_url'] = vllm_url
+    metrics['total_time_seconds'] = round(time.time() - start_time, 2)
+
+    with open(metrics_path, 'w') as f:
+        json.dump(metrics, f, indent=2, ensure_ascii=False)
+
     # Print summary
     elapsed = time.time() - start_time
     print(f"\n{'='*60}")
@@ -263,8 +383,10 @@ def process_parquet(
     print(f"{'='*60}")
     print(f"Total questions: {len(df)}")
     print(f"Successfully answered: {success_count}")
+    print(f"Correct answers: {metrics['correct_answers']} ({metrics['overall_accuracy']:.2%})")
     print(f"Errors: {error_count}")
     print(f"Results saved to: {output_path}")
+    print(f"Metrics saved to: {metrics_path}")
     print(f"Total time: {elapsed:.2f}s ({elapsed/60:.2f}m)")
     if success_count > 0:
         print(f"Average time per question: {elapsed/success_count:.2f}s")

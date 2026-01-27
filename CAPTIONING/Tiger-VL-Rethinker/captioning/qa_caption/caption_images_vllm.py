@@ -8,7 +8,7 @@ import argparse
 import json
 import os
 from pathlib import Path
-from typing import Dict, Set, Optional
+from typing import Dict, Optional
 import pandas as pd
 from tqdm import tqdm
 import time
@@ -137,9 +137,14 @@ def caption_image_vllm(
     return result['choices'][0]['message']['content'].strip()
 
 
-def collect_all_images(df: pd.DataFrame, dataset_root: str) -> Set[str]:
-    """Collect all unique image paths from the dataframe."""
-    all_images = set()
+def collect_all_images(df: pd.DataFrame, dataset_root: str) -> Dict[str, str]:
+    """
+    Collect all unique image paths from the dataframe.
+
+    Returns:
+        Dictionary mapping relative paths (from parquet) to absolute paths
+    """
+    image_map = {}
     for idx, row in df.iterrows():
         image_array = row['image']
         if isinstance(image_array, str):
@@ -150,9 +155,9 @@ def collect_all_images(df: pd.DataFrame, dataset_root: str) -> Set[str]:
         for img in image_paths:
             full_path = os.path.join(dataset_root, img)
             if os.path.exists(full_path):
-                all_images.add(full_path)
+                image_map[img] = full_path  # Map relative to absolute
 
-    return all_images
+    return image_map
 
 
 def caption_images(
@@ -207,8 +212,8 @@ def caption_images(
 
     # Collect all unique images
     print("\nCollecting all unique images...")
-    all_images = collect_all_images(df, dataset_root)
-    print(f"Found {len(all_images)} unique images")
+    image_map = collect_all_images(df, dataset_root)
+    print(f"Found {len(image_map)} unique images")
 
     # Load existing captions if available
     captions = {}
@@ -222,20 +227,20 @@ def caption_images(
     success_count = 0
     error_count = 0
 
-    for img_path in tqdm(sorted(all_images), desc="Captioning"):
+    for relative_path, absolute_path in tqdm(sorted(image_map.items()), desc="Captioning"):
         # Skip if already captioned
-        if img_path in captions and not overwrite:
+        if relative_path in captions and not overwrite:
             continue
 
         try:
             caption = caption_image_vllm(
                 server_url=vllm_url,
-                image_path=img_path,
+                image_path=absolute_path,
                 model=model,
                 prompt=caption_prompt,
                 max_tokens=max_tokens
             )
-            captions[img_path] = caption
+            captions[relative_path] = caption  # Use relative path as key
             success_count += 1
 
             # Incremental save
@@ -243,7 +248,7 @@ def caption_images(
                 json.dump(captions, f, indent=2, ensure_ascii=False)
 
         except Exception as e:
-            print(f"\nError captioning {img_path}: {e}")
+            print(f"\nError captioning {relative_path}: {e}")
             error_count += 1
             continue
 
@@ -252,7 +257,7 @@ def caption_images(
     print(f"\n{'='*60}")
     print(f"Captioning complete!")
     print(f"{'='*60}")
-    print(f"Total unique images: {len(all_images)}")
+    print(f"Total unique images: {len(image_map)}")
     print(f"Successfully captioned: {success_count}")
     print(f"Errors: {error_count}")
     print(f"Captions saved to: {caption_output_path}")
