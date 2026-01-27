@@ -83,58 +83,10 @@ def encode_image_base64(image_path: str) -> str:
         return base64.b64encode(f.read()).decode("utf-8")
 
 
-def extract_letter(answer_text: str, num_options: int) -> Optional[str]:
-    """Extract answer letter from model output."""
-    if not answer_text:
-        return None
-
-    # If response contains </think>, extract letter from text after it
-    if "</think>" in answer_text:
-        after_think = answer_text.split("</think>", 1)[1]
-        answer_text = after_think
-
-    if "Answer: " in answer_text:
-        after_answer = answer_text.split("Answer: ", 1)[1]
-        answer_text = after_answer
-
-    if "\n" in answer_text:
-        after_n = answer_text.split("\n", 1)[0]
-        answer_text = after_n
-
-    # Look for letter pattern
-    m = re.search(r"\b([A-Z])\b", answer_text.upper())
-    if m:
-        letter = m.group(1)
-        idx = LETTER_ALPH.find(letter)
-        if 0 <= idx < max(1, num_options):
-            return letter
-
-    # Look for number pattern
-    m = re.search(r"\b([1-9][0-9]?)\b", answer_text)
-    if m:
-        k = int(m.group(1))
-        if 1 <= k <= max(1, num_options):
-            return LETTER_ALPH[k - 1]
-
-    return None
-
-
-def extract_ground_truth_letter(answer: str) -> Optional[str]:
-    """Extract letter from ground truth answer like '\\boxed{A}'."""
-    if not answer:
-        return None
-
-    # Match \boxed{A} or \boxed{B} etc.
-    m = re.search(r'\\boxed\{([A-Z])\}', answer)
-    if m:
-        return m.group(1)
-
-    # Direct letter match
-    m = re.search(r'\b([A-Z])\b', answer.upper())
-    if m:
-        return m.group(1)
-
-    return None
+def has_choices(question: str) -> bool:
+    """Check if question has multiple choice options."""
+    # Look for patterns like (A), (B), (C) or "Choices:"
+    return bool(re.search(r'\([A-Z]\)', question) or 'Choices:' in question or 'choices:' in question.lower())
 
 
 def count_options(question: str) -> int:
@@ -142,6 +94,98 @@ def count_options(question: str) -> int:
     # Count patterns like (A), (B), (C)
     matches = re.findall(r'\([A-Z]\)', question)
     return len(matches)
+
+
+def extract_answer(answer_text: str, question: str) -> Optional[str]:
+    """
+    Extract answer from model output.
+    Handles both multiple choice (letters) and open-ended (numbers/text) questions.
+    """
+    if not answer_text:
+        return None
+
+    # Clean up the answer text
+    cleaned = answer_text.strip()
+
+    # If response contains </think>, extract text after it
+    if "</think>" in cleaned:
+        cleaned = cleaned.split("</think>", 1)[1].strip()
+
+    # If contains "Answer: ", extract text after it
+    if "Answer: " in cleaned:
+        cleaned = cleaned.split("Answer: ", 1)[1].strip()
+
+    # Take first line if multiline
+    if "\n" in cleaned:
+        cleaned = cleaned.split("\n", 1)[0].strip()
+
+    # Check if question has choices
+    if has_choices(question):
+        # Multiple choice question - extract letter
+        num_options = count_options(question)
+
+        # Look for letter pattern
+        m = re.search(r"\b([A-Z])\b", cleaned.upper())
+        if m:
+            letter = m.group(1)
+            idx = LETTER_ALPH.find(letter)
+            if 0 <= idx < max(1, num_options):
+                return letter
+
+        # Look for number pattern and convert to letter
+        m = re.search(r"\b([1-9][0-9]?)\b", cleaned)
+        if m:
+            k = int(m.group(1))
+            if 1 <= k <= max(1, num_options):
+                return LETTER_ALPH[k - 1]
+    else:
+        # Open-ended question - extract number or text
+        # First try to extract a number
+        m = re.search(r'\b(\d+)\b', cleaned)
+        if m:
+            return m.group(1)
+
+        # If no number found, return the cleaned text (up to 50 chars)
+        return cleaned[:50] if cleaned else None
+
+    return None
+
+
+def extract_ground_truth(answer: str, question: str) -> Optional[str]:
+    """
+    Extract answer from ground truth.
+    Handles both '\\boxed{A}' (letter) and '\\boxed{100}' (number) formats.
+    """
+    if not answer:
+        return None
+
+    # Match \boxed{...} pattern
+    m = re.search(r'\\boxed\{([^}]+)\}', answer)
+    if m:
+        content = m.group(1).strip()
+
+        # Check if question has choices
+        if has_choices(question):
+            # Multiple choice - should be a letter
+            if len(content) == 1 and content.isalpha():
+                return content.upper()
+        else:
+            # Open-ended - return as is (number or text)
+            return content
+
+    # Fallback: try direct extraction
+    if has_choices(question):
+        # Look for single letter
+        m = re.search(r'\b([A-Z])\b', answer.upper())
+        if m:
+            return m.group(1)
+    else:
+        # Look for number
+        m = re.search(r'\b(\d+)\b', answer)
+        if m:
+            return m.group(1)
+
+    return None
 
 
 def compute_metrics(results: Dict) -> Dict:
@@ -495,9 +539,8 @@ def process_parquet_with_captions(
 
             ground_truth = row['answer']
 
-            # Count options and extract ground truth letter
-            num_options = count_options(row['question'])
-            gt_letter = extract_ground_truth_letter(ground_truth)
+            # Extract ground truth answer
+            gt_answer = extract_ground_truth(ground_truth, row['question'])
 
             # Generate answer using text-only question
             raw_output = answer_question_text_only(
@@ -508,21 +551,22 @@ def process_parquet_with_captions(
                 temperature=temperature
             )
 
-            # Extract predicted letter
-            predicted_letter = extract_letter(raw_output, num_options)
+            # Extract predicted answer
+            predicted_answer = extract_answer(raw_output, row['question'])
 
             # Check if correct
-            is_correct = (predicted_letter == gt_letter) if (predicted_letter and gt_letter) else False
+            is_correct = (predicted_answer == gt_answer) if (predicted_answer and gt_answer) else False
 
             # Save result
             results[qid] = {
                 'question_original': row['question'],
                 'question_with_captions': question,
                 'ground_truth': ground_truth,
-                'ground_truth_letter': gt_letter,
+                'ground_truth_answer': gt_answer,
                 'raw_output': raw_output,
-                'predicted_letter': predicted_letter,
+                'predicted_answer': predicted_answer,
                 'is_correct': is_correct,
+                'question_type': 'multiple_choice' if has_choices(row['question']) else 'open_ended',
                 'category': row['category'],
                 'source': row['source'],
                 'image_paths': image_paths_relative,  # Use relative paths
