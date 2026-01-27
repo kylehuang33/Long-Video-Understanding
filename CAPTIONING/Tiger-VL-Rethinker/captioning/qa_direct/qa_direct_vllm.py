@@ -88,10 +88,21 @@ def count_options(question: str) -> int:
     return len(matches)
 
 
+def normalize_answer(answer: str) -> str:
+    """Normalize answer for comparison."""
+    if not answer:
+        return ""
+    # Convert to lowercase and strip whitespace
+    normalized = answer.lower().strip()
+    # Remove extra whitespace
+    normalized = re.sub(r'\s+', ' ', normalized)
+    return normalized
+
+
 def extract_answer(answer_text: str, question: str) -> Optional[str]:
     """
     Extract answer from model output.
-    Handles both multiple choice (letters) and open-ended (numbers/text) questions.
+    Handles multiple choice (letters), numbers, and text answers.
     """
     if not answer_text:
         return None
@@ -106,14 +117,19 @@ def extract_answer(answer_text: str, question: str) -> Optional[str]:
     # If contains "Answer: ", extract text after it
     if "Answer: " in cleaned:
         cleaned = cleaned.split("Answer: ", 1)[1].strip()
+    elif "answer: " in cleaned.lower():
+        idx = cleaned.lower().find("answer: ")
+        cleaned = cleaned[idx + 8:].strip()
 
-    # Take first line if multiline
+    # Take first line if multiline (but keep some context)
     if "\n" in cleaned:
-        cleaned = cleaned.split("\n", 1)[0].strip()
+        first_line = cleaned.split("\n", 1)[0].strip()
+        # If first line is very short, it's likely the answer
+        if len(first_line) < 50:
+            cleaned = first_line
 
-    # Check if question has choices
+    # Check if question has choices - extract letter
     if has_choices(question):
-        # Multiple choice question - extract letter
         num_options = count_options(question)
 
         # Look for letter pattern
@@ -131,14 +147,30 @@ def extract_answer(answer_text: str, question: str) -> Optional[str]:
             if 1 <= k <= max(1, num_options):
                 return LETTER_ALPH[k - 1]
     else:
-        # Open-ended question - extract number or text
-        # First try to extract a number
+        # Open-ended question - extract the answer
+
+        # First, check for common yes/no patterns
+        cleaned_lower = cleaned.lower()
+        if cleaned_lower in ['yes', 'no']:
+            return cleaned.capitalize()
+        if cleaned_lower.startswith('yes,') or cleaned_lower.startswith('yes.') or cleaned_lower.startswith('yes '):
+            return 'Yes'
+        if cleaned_lower.startswith('no,') or cleaned_lower.startswith('no.') or cleaned_lower.startswith('no '):
+            return 'No'
+
+        # Try to extract a number (most common for counting questions)
         m = re.search(r'\b(\d+)\b', cleaned)
         if m:
             return m.group(1)
 
-        # If no number found, return the cleaned text (up to 50 chars)
-        return cleaned[:50] if cleaned else None
+        # Return cleaned text (up to 100 chars) for text answers
+        # Remove common prefixes
+        for prefix in ['the answer is ', 'it is ', 'there are ', 'there is ']:
+            if cleaned_lower.startswith(prefix):
+                cleaned = cleaned[len(prefix):]
+                break
+
+        return cleaned[:100].strip() if cleaned else None
 
     return None
 
@@ -146,7 +178,8 @@ def extract_answer(answer_text: str, question: str) -> Optional[str]:
 def extract_ground_truth(answer: str, question: str) -> Optional[str]:
     """
     Extract answer from ground truth.
-    Handles both '\\boxed{A}' (letter) and '\\boxed{100}' (number) formats.
+    Handles '\\boxed{A}' (letter), '\\boxed{100}' (number), '\\boxed{No}' (text),
+    and '\\boxed{4 - 3 = 1}' (math expression).
     """
     if not answer:
         return None
@@ -156,28 +189,69 @@ def extract_ground_truth(answer: str, question: str) -> Optional[str]:
     if m:
         content = m.group(1).strip()
 
-        # Check if question has choices
+        # Check if question has choices - should be a letter
         if has_choices(question):
-            # Multiple choice - should be a letter
             if len(content) == 1 and content.isalpha():
                 return content.upper()
+            # If not a single letter, try to find one
+            letter_match = re.search(r'\b([A-Z])\b', content.upper())
+            if letter_match:
+                return letter_match.group(1)
         else:
-            # Open-ended - return as is (number or text)
+            # For math expressions like "4 - 3 = 1", extract the result after "="
+            if '=' in content:
+                result = content.split('=')[-1].strip()
+                return result
+
+            # Return content as-is for text/number answers
             return content
 
     # Fallback: try direct extraction
     if has_choices(question):
-        # Look for single letter
         m = re.search(r'\b([A-Z])\b', answer.upper())
         if m:
             return m.group(1)
     else:
-        # Look for number
         m = re.search(r'\b(\d+)\b', answer)
         if m:
             return m.group(1)
 
     return None
+
+
+def compare_answers(predicted: str, ground_truth: str) -> bool:
+    """
+    Compare predicted answer with ground truth.
+    Handles case-insensitive comparison and common variations.
+    """
+    if not predicted or not ground_truth:
+        return False
+
+    # Exact match
+    if predicted == ground_truth:
+        return True
+
+    # Case-insensitive match
+    if predicted.lower() == ground_truth.lower():
+        return True
+
+    # Normalize and compare
+    pred_norm = normalize_answer(predicted)
+    gt_norm = normalize_answer(ground_truth)
+
+    if pred_norm == gt_norm:
+        return True
+
+    # For numeric answers, try numeric comparison
+    try:
+        pred_num = float(predicted)
+        gt_num = float(ground_truth)
+        if pred_num == gt_num:
+            return True
+    except (ValueError, TypeError):
+        pass
+
+    return False
 
 
 def answer_question_vllm(
@@ -218,8 +292,11 @@ def answer_question_vllm(
     # Add question text (remove <image> placeholder as we're adding images separately)
     question_text = question.replace("<image>", "").strip()
 
-    # Add instruction prefix
-    full_prompt = f"Please look at the image and choose only one option.\n\n{question_text}"
+    # Add instruction prefix based on question type
+    if has_choices(question):
+        full_prompt = f"Please look at the image and choose only one option.\n\n{question_text}"
+    else:
+        full_prompt = f"Please look at the image and answer the question with a single number or short answer.\n\n{question_text}"
 
     content.append({
         "type": "text",
@@ -380,8 +457,8 @@ def process_parquet(
             # Extract predicted answer
             predicted_answer = extract_answer(raw_output, question)
 
-            # Check if correct
-            is_correct = (predicted_answer == gt_answer) if (predicted_answer and gt_answer) else False
+            # Check if correct using flexible comparison
+            is_correct = compare_answers(predicted_answer, gt_answer)
 
             # Save result
             results[qid] = {

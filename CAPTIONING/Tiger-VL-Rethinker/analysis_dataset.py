@@ -8,7 +8,7 @@ print("columns:", df.columns.tolist())
 print(df.head(10))            # first 3 rows
 
 # See a single row (as a Series)
-row0 = df.iloc[3:7]
+row0 = df.iloc[3:20]
 print("\nrow 0:\n", row0)
 
 # If you want it as a dict (better for nested/list fields):
