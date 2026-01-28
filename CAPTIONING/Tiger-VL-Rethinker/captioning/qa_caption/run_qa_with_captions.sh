@@ -6,6 +6,8 @@
 
 # IMPORTANT: Run run_caption.sh first to generate captions!
 
+# Dependencies: pip install pandas pyarrow requests tqdm math-verify
+
 PARQUET_PATH="/mnt/data-alpha-sg-02/team-agent/ai_glasses/datasets/ViRL39K/39Krelease.parquet"
 DATASET_ROOT="/mnt/data-alpha-sg-02/team-agent/ai_glasses/datasets/ViRL39K"
 OUTPUT_DIR="./results_caption"
@@ -27,8 +29,12 @@ fi
 mkdir -p "$OUTPUT_DIR"
 
 # Run QA with captions
-# Output will be saved to: {OUTPUT_DIR}/qa_results/{qa_model}/{qa_model}_with_{caption_model}_{style}.json
-# Example: ./results_caption/qa_results/Qwen3-VL-4B-Instruct/Qwen3-VL-4B-Instruct_with_Qwen3-VL-4B-Instruct_simple.json
+# Output will be saved to:
+#   Results: {OUTPUT_DIR}/qa_results/{qa_model}/{qa_model}_with_{caption_model}_{style}.json
+#   Metrics: {OUTPUT_DIR}/qa_results/{qa_model}/{qa_model}_with_{caption_model}_{style}_metrics.json
+# Example:
+#   ./results_caption/qa_results/Qwen3-VL-4B-Instruct/Qwen3-VL-4B-Instruct_with_Qwen3-VL-4B-Instruct_simple.json
+#   ./results_caption/qa_results/Qwen3-VL-4B-Instruct/Qwen3-VL-4B-Instruct_with_Qwen3-VL-4B-Instruct_simple_metrics.json
 python qa_with_captions_vllm.py \
     --parquet-path "$PARQUET_PATH" \
     --dataset-root "$DATASET_ROOT" \
@@ -39,4 +45,4 @@ python qa_with_captions_vllm.py \
     --max-tokens 512 \
     --temperature 0.0
 
-echo "Done! Check $OUTPUT_DIR/qa_results for QA results"
+echo "Done! Check $OUTPUT_DIR/qa_results for QA results and metrics"

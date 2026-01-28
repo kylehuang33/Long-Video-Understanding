@@ -16,6 +16,16 @@ import time
 import base64
 import requests
 
+# Import math_verify for answer extraction and verification
+try:
+    from math_verify import parse, verify
+    from math_verify.parser import LatexExtractionConfig
+    MATH_VERIFY_AVAILABLE = True
+except ImportError:
+    MATH_VERIFY_AVAILABLE = False
+    print("Warning: math_verify not installed. Using fallback extraction.")
+    print("Install with: pip install math-verify")
+
 
 LETTER_ALPH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -99,9 +109,35 @@ def normalize_answer(answer: str) -> str:
     return normalized
 
 
+def extract_answer_math_verify(answer_text: str) -> Optional[str]:
+    """
+    Extract answer using math_verify library.
+    Returns the extracted answer string.
+    """
+    if not MATH_VERIFY_AVAILABLE or not answer_text:
+        return None
+
+    try:
+        # Configure extraction to look for boxed answers and general math
+        config = LatexExtractionConfig(
+            normalization_config=None,
+            boxed_match_priority=0,  # Prioritize \boxed{} matches
+            try_extract_without_anchor=True,
+        )
+        # Parse the answer text
+        parsed = parse(answer_text, extraction_config=config)
+        if parsed:
+            return str(parsed)
+    except Exception:
+        pass
+
+    return None
+
+
 def extract_answer(answer_text: str, question: str) -> Optional[str]:
     """
     Extract answer from model output.
+    Uses math_verify if available, otherwise falls back to regex extraction.
     Handles multiple choice (letters), numbers, and text answers.
     """
     if not answer_text:
@@ -147,7 +183,13 @@ def extract_answer(answer_text: str, question: str) -> Optional[str]:
             if 1 <= k <= max(1, num_options):
                 return LETTER_ALPH[k - 1]
     else:
-        # Open-ended question - extract the answer
+        # Open-ended question - try math_verify first
+        if MATH_VERIFY_AVAILABLE:
+            math_answer = extract_answer_math_verify(cleaned)
+            if math_answer:
+                return math_answer
+
+        # Fallback: manual extraction
 
         # First, check for common yes/no patterns
         cleaned_lower = cleaned.lower()
@@ -175,54 +217,106 @@ def extract_answer(answer_text: str, question: str) -> Optional[str]:
     return None
 
 
+def extract_ground_truth_math_verify(answer: str) -> Optional[str]:
+    """
+    Extract ground truth answer using math_verify library.
+    """
+    if not MATH_VERIFY_AVAILABLE or not answer:
+        return None
+
+    try:
+        config = LatexExtractionConfig(
+            normalization_config=None,
+            boxed_match_priority=0,
+            try_extract_without_anchor=True,
+        )
+        parsed = parse(answer, extraction_config=config)
+        if parsed:
+            return str(parsed)
+    except Exception:
+        pass
+
+    return None
+
+
 def extract_ground_truth(answer: str, question: str) -> Optional[str]:
     """
     Extract answer from ground truth.
+    Uses math_verify if available for better parsing.
     Handles '\\boxed{A}' (letter), '\\boxed{100}' (number), '\\boxed{No}' (text),
     and '\\boxed{4 - 3 = 1}' (math expression).
     """
     if not answer:
         return None
 
-    # Match \boxed{...} pattern
+    # For multiple choice, extract letter directly
+    if has_choices(question):
+        m = re.search(r'\\boxed\{([A-Z])\}', answer)
+        if m:
+            return m.group(1)
+        # Fallback
+        m = re.search(r'\b([A-Z])\b', answer.upper())
+        if m:
+            return m.group(1)
+        return None
+
+    # For open-ended questions, try math_verify first
+    if MATH_VERIFY_AVAILABLE:
+        math_answer = extract_ground_truth_math_verify(answer)
+        if math_answer:
+            return math_answer
+
+    # Fallback: manual extraction
     m = re.search(r'\\boxed\{([^}]+)\}', answer)
     if m:
         content = m.group(1).strip()
 
-        # Check if question has choices - should be a letter
-        if has_choices(question):
-            if len(content) == 1 and content.isalpha():
-                return content.upper()
-            # If not a single letter, try to find one
-            letter_match = re.search(r'\b([A-Z])\b', content.upper())
-            if letter_match:
-                return letter_match.group(1)
-        else:
-            # For math expressions like "4 - 3 = 1", extract the result after "="
-            if '=' in content:
-                result = content.split('=')[-1].strip()
-                return result
+        # For math expressions like "4 - 3 = 1", extract the result after "="
+        if '=' in content:
+            result = content.split('=')[-1].strip()
+            return result
 
-            # Return content as-is for text/number answers
-            return content
+        # Return content as-is for text/number answers
+        return content
 
-    # Fallback: try direct extraction
-    if has_choices(question):
-        m = re.search(r'\b([A-Z])\b', answer.upper())
-        if m:
-            return m.group(1)
-    else:
-        m = re.search(r'\b(\d+)\b', answer)
-        if m:
-            return m.group(1)
+    # Last fallback: try to find a number
+    m = re.search(r'\b(\d+)\b', answer)
+    if m:
+        return m.group(1)
 
     return None
+
+
+def compare_answers_math_verify(predicted: str, ground_truth: str) -> bool:
+    """
+    Compare answers using math_verify library for mathematical equivalence.
+    """
+    if not MATH_VERIFY_AVAILABLE:
+        return False
+
+    try:
+        # Parse both answers
+        config = LatexExtractionConfig(
+            normalization_config=None,
+            boxed_match_priority=0,
+            try_extract_without_anchor=True,
+        )
+        pred_parsed = parse(predicted, extraction_config=config)
+        gt_parsed = parse(ground_truth, extraction_config=config)
+
+        if pred_parsed is not None and gt_parsed is not None:
+            return verify(pred_parsed, gt_parsed)
+    except Exception:
+        pass
+
+    return False
 
 
 def compare_answers(predicted: str, ground_truth: str) -> bool:
     """
     Compare predicted answer with ground truth.
-    Handles case-insensitive comparison and common variations.
+    Uses math_verify for mathematical equivalence if available.
+    Falls back to string comparison.
     """
     if not predicted or not ground_truth:
         return False
@@ -234,6 +328,11 @@ def compare_answers(predicted: str, ground_truth: str) -> bool:
     # Case-insensitive match
     if predicted.lower() == ground_truth.lower():
         return True
+
+    # Try math_verify for mathematical equivalence
+    if MATH_VERIFY_AVAILABLE:
+        if compare_answers_math_verify(predicted, ground_truth):
+            return True
 
     # Normalize and compare
     pred_norm = normalize_answer(predicted)

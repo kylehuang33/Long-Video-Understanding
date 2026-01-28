@@ -4,6 +4,8 @@
 # Make sure vLLM server is running before executing this script!
 # Start vLLM server with: vllm serve Qwen/Qwen3-VL-4B-Instruct --port 8000
 
+# Dependencies: pip install pandas pyarrow requests tqdm
+
 PARQUET_PATH="/mnt/data-alpha-sg-02/team-agent/ai_glasses/datasets/ViRL39K/39Krelease.parquet"
 DATASET_ROOT="/mnt/data-alpha-sg-02/team-agent/ai_glasses/datasets/ViRL39K"
 OUTPUT_DIR="./results_caption"
